@@ -27,9 +27,12 @@ function App() {
           Ask Your Data Anything.
         </h1>
 
-        <p className="text-base sm:text-lg text-gray-600 max-w-xl mb-8 px-4">
-          EmbedMetrics helps SaaS products unlock intuitive, AI-powered
-          insights—right inside their app.
+        <p className="text-base sm:text-lg text-gray-600 max-w-xl mb-2 px-4">
+          Deliver AI-powered insights — right inside your app.
+        </p>
+
+        <p className="text-sm text-gray-500 mb-8 px-4">
+          Embeddable analytics made for modern product teams.
         </p>
 
         <div>
