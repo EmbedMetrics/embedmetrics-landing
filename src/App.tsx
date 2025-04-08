@@ -72,11 +72,9 @@ function App() {
             <motion.div
               key={title}
               className="bg-white rounded-xl shadow-md hover:shadow-lg p-6 transition text-center"
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={fadeUp}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
             >
               <Icon className="w-10 h-10 text-indigo-600 mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">{title}</h3>
