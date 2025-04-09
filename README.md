@@ -1,26 +1,34 @@
-# EmbedMetrics
+<p align="center">
+  <img src="https://embedmetrics.com/logo.svg" alt="EmbedMetrics logo" width="200" />
+</p>
 
-**Deliver AI-powered insights — right inside your app.**
+# EmbedMetrics Landing Page
 
-EmbedMetrics is an embeddable analytics platform designed to help product teams and developers integrate conversational, AI-powered data exploration directly into their applications.
+This is the public landing page for [**EmbedMetrics**](https://embedmetrics.com) — the AI-powered, embeddable analytics platform.
+
+> Let your users **ask questions** and get **visual answers** — all within your app.
+
+---
+
+## 🚀 Live Site
+
+👉 Visit us at: [https://embedmetrics.com](https://embedmetrics.com)
+
+## 📬 Get Early Access
+
+We're currently in development and onboarding early users.  
+Want to try it out or chat about your use case?
+
+👉 [Request early access](https://embedmetrics.com) or email us at [hello@embedmetrics.com](mailto:hello@embedmetrics.com)
 
 ## 🔍 What It Does
 
 - Natural language queries → instant insights
 - Visualizations, summaries, and KPIs — AI-generated
 - Embeds with one line of code
-- Built with React, Tailwind, and Vite
 
-## 🚀 Tech Stack
+---
 
-- **Frontend:** React + Tailwind CSS + Vite
-- **Backend (planned):** Spring Boot, Spring AI
-- **Deployment:** Netlify (landing page)
-
-## 🧠 Status
-
-This is an early-stage prototype to validate product and technical direction. Not yet production-ready.
-
-## 📫 Contact
-
-Want to chat? Reach out at `hello@embedmetrics.com`
+<p align="center">
+  Built with ❤️ by the EmbedMetrics team.
+</p>
