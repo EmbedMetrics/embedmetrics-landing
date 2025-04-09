@@ -8,8 +8,6 @@ This is the public landing page for [**EmbedMetrics**](https://embedmetrics.com)
 
 > Let your users **ask questions** and get **visual answers** — all within your app.
 
----
-
 ## 🚀 Live Site
 
 👉 Visit us at: [https://embedmetrics.com](https://embedmetrics.com)
