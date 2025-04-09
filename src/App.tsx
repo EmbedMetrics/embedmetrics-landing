@@ -122,11 +122,6 @@ function App() {
         hello@embedmetrics.com
       </footer>
 
-      <form name="early-access" netlify netlify-honeypot="bot-field" hidden>
-        <input type="email" name="email" />
-        <input type="text" name="bot-field" />
-      </form>
-
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md relative">
