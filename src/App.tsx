@@ -78,10 +78,6 @@ function App() {
         </div>
       </motion.div>
 
-      <form name="early-access" netlify hidden>
-        <input type="email" name="email" />
-      </form>
-
       {/* How It Works Section */}
       <div className="w-full max-w-6xl py-16 px-4 sm:px-6">
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
@@ -125,6 +121,11 @@ function App() {
         © {new Date().getFullYear()} EmbedMetrics. All rights reserved. |
         hello@embedmetrics.com
       </footer>
+
+      <form name="early-access" netlify netlify-honeypot="bot-field" hidden>
+        <input type="email" name="email" />
+        <input type="text" name="bot-field" />
+      </form>
 
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
