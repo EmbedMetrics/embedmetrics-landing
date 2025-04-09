@@ -4,7 +4,12 @@
 
 # EmbedMetrics Landing Page
 
-This is the public landing page for [**EmbedMetrics**](https://embedmetrics.com) — the AI-powered, embeddable analytics platform.
+<p align="center">
+  <img alt="Status" src="https://img.shields.io/badge/status-in%20development-yellow" />
+  <img alt="License" src="https://img.shields.io/badge/license-proprietary-red" />
+</p>
+
+This repo contains the landing page for [**EmbedMetrics**](https://embedmetrics.com) — the AI-powered, embeddable analytics platform.
 
 > Let your users **ask questions** and get **visual answers** — all within your app.
 
