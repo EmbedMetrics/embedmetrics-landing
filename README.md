@@ -6,7 +6,7 @@
 
 <p align="center">
   <img alt="Status" src="https://img.shields.io/badge/status-in%20development-yellow" />
-  <img alt="License" src="https://img.shields.io/badge/license-proprietary-red" />
+  <img alt="License" src="https://img.shields.io/badge/license-proprietary-blue" />
 </p>
 
 This repo contains the landing page for [**EmbedMetrics**](https://embedmetrics.com) — the AI-powered, embeddable analytics platform.
