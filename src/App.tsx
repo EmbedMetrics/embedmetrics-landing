@@ -53,17 +53,23 @@ function App() {
         transition={{ duration: 0.6 }}
       >
         <img src={logo} alt="EmbedMetrics Logo" className="w-20 h-20 mb-6" />
+        <h2 className="text-xs tracking-widest text-indigo-600 uppercase mb-2 text-center">
+          Embeddable AI Analytics
+        </h2>
 
-        <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 text-gray-900 max-w-2xl">
-          Ask Your Data Anything.
+        <h1 className="text-xl sm:text-3xl font-bold leading-snug mb-4 text-gray-900 max-w-3xl text-center">
+          Built for Devs.
+          <br />
+          Loved by Users.
         </h1>
 
-        <p className="text-base sm:text-lg text-gray-600 max-w-xl mb-2 px-4">
-          Deliver AI-powered insights — right inside your app.
+        <p className="text-base sm:text-lg text-gray-600 max-w-xl mb-2 px-4 text-center">
+          Add smart, conversational analytics to your app with one line of code.
+          Delight users with intuitive answers.
         </p>
 
-        <p className="text-sm text-gray-500 mb-8 px-4">
-          Embeddable analytics made for modern product teams.
+        <p className="text-sm text-gray-500 mb-8 px-4 text-center">
+          No dashboards. Just answers.
         </p>
 
         <div>
@@ -80,11 +86,16 @@ function App() {
 
       {/* How It Works Section */}
       <div className="w-full max-w-6xl py-16 px-4 sm:px-6">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+        <h2 className="text-base sm:text-3xl font-semibold text-center text-gray-900 mb-12">
           How It Works
         </h2>
         <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3">
           {[
+            {
+              Icon: Globe,
+              title: "Embed Anywhere",
+              desc: "Embed with one line of code.",
+            },
             {
               Icon: Brain,
               title: "Ask in Plain English",
@@ -93,12 +104,7 @@ function App() {
             {
               Icon: BarChart3,
               title: "Get Instant Insights",
-              desc: "See AI-generated answers in charts, summaries, or tables.",
-            },
-            {
-              Icon: Globe,
-              title: "Embed Anywhere",
-              desc: "Drop the widget into your app with one line of code.",
+              desc: "EmbedMetrics delivers answers in charts, summaries, or KPIs — powered by your data.",
             },
           ].map(({ Icon, title, desc }, i) => (
             <motion.div
@@ -109,7 +115,7 @@ function App() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
             >
               <Icon className="w-10 h-10 text-indigo-600 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">{title}</h3>
+              <h3 className="text-sm sm:text-lg font-semibold mb-2">{title}</h3>
               <p className="text-gray-600">{desc}</p>
             </motion.div>
           ))}
