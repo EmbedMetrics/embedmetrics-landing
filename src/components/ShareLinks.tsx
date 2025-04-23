@@ -9,7 +9,7 @@ export default function ShareLinks({ url }: ShareLinksProps) {
   const encodedUrl = encodeURIComponent(url);
 
   return (
-    <footer className="mt-10 border-t pt-6">
+    <footer className="mt-10 border-t border-gray-300 pt-6">
       <p className="text-sm text-gray-500 mb-2 font-medium">Share this post:</p>
       <div className="flex gap-4 items-center text-indigo-600 text-sm">
         <a

@@ -51,7 +51,7 @@ function LandingPage() {
   return (
     <>
       <MetaHead />
-      <div className="min-h-screen flex flex-col items-center px-4 bg-gradient-to-b from-white to-indigo-50 text-gray-800">
+      <div className="min-h-screen flex flex-col bg-gradient-to-b from-white to-indigo-50 text-gray-800">
         <Header />
 
         <ContentContainer>
