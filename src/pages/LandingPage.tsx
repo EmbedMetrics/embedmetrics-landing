@@ -75,16 +75,13 @@ function LandingPage() {
                 id="hero-heading"
                 className="text-xs tracking-widest text-indigo-600 uppercase mb-2 text-center"
               >
-                Embeddable AI Analytics
+                Smart data assistant for your app
               </h2>
               <h1 className="text-xl sm:text-3xl font-bold leading-snug mb-4 text-gray-900 max-w-3xl text-center">
-                Built for Devs.
-                <br />
-                Loved by Users.
+                AI-native analytics that lives inside your app
               </h1>
               <p className="text-base sm:text-lg text-gray-600 max-w-xl mb-2 px-4 text-center">
-                Add smart, conversational analytics to your app with one line of
-                code. Delight users with intuitive answers.
+                Built for product teams. Loved by users.
               </p>
 
               <p className="text-sm text-gray-500 mb-8 px-4 text-center">

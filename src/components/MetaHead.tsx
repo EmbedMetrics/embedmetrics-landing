@@ -4,19 +4,21 @@ export default function MetaHead() {
   return (
     <Helmet>
       <title>
-        EmbedMetrics – Embeddable Analytics for Devs. AI-Powered. Users Love It.
+        EmbedMetrics – AI-native analytics that lives inside your app
       </title>
+
       <meta
         name="description"
-        content="Embeddable analytics for devs. Embedded intelligence for your users. Deliver AI-powered insights — right inside your app."
+        content="EmbedMetrics is a smart, AI-native data assistant that lives inside your app. Built for product teams. Loved by users. No dashboards. Just answers."
       />
+
       <meta
         property="og:title"
-        content="EmbedMetrics – Embeddable Analytics for Devs. AI-Powered. Users Love It."
+        content="EmbedMetrics – AI-native analytics that lives inside your app"
       />
       <meta
         property="og:description"
-        content="Embeddable analytics for devs. Embedded intelligence for your users. Deliver AI-powered insights — right inside your app."
+        content="AI-native analytics that lives inside your app. Built for product teams. Loved by users. No dashboards. Just answers."
       />
       <meta property="og:image" content="/embedmetrics-preview.png" />
       <meta property="og:url" content="https://embedmetrics.com" />

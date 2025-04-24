@@ -1,4 +1,4 @@
-import { FaLinkedinIn } from "react-icons/fa6";
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
@@ -41,6 +41,15 @@ export default function Footer() {
               className="text-indigo-600 hover:text-indigo-800 transition focus:outline-none focus:ring-2 focus:ring-indigo-500"
             >
               <FaLinkedinIn className="w-5 h-5" />
+            </a>
+            <a
+              href="https://x.com/EmbedMetrics"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X"
+              className="text-indigo-600 hover:text-indigo-800 transition focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              <FaXTwitter className="w-5 h-5" />
             </a>
           </div>
         </div>
