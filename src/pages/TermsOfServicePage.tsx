@@ -73,9 +73,7 @@ export default function TermsOfServicePage() {
 
           <h2 className="text-lg font-semibold mt-8 mb-2">7. Contact Us</h2>
           <p>
-            For questions about these Terms, contact us at:
-            <br />
-            📧{" "}
+            For questions about these Terms, contact us at:{" "}
             <a
               href="mailto:hello@embedmetrics.com"
               className="text-indigo-600 underline"

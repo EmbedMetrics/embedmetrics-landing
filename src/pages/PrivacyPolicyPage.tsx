@@ -110,9 +110,7 @@ export default function PrivacyPolicyPage() {
           <h2 className="text-lg font-semibold mt-8 mb-2">11. Contact Us</h2>
           <p>
             If you have questions about this Privacy Policy or our data
-            practices, please reach out to:
-            <br />
-            📧{" "}
+            practices, please reach out to:{" "}
             <a
               href="mailto:hello@embedmetrics.com"
               className="text-indigo-600 underline"
