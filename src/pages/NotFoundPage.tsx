@@ -13,7 +13,7 @@ const NotFoundPage: React.FC = () => {
       <Header />
 
       {/* Main content */}
-      <main className="flex flex-col flex-grow items-center justify-center text-center p-8">
+      <main className="flex flex-col flex-grow items-center justify-center text-center px-8 pt-24 pb-8">
         <h1 className="text-5xl font-bold mb-4">404</h1>
         <img
           src="/assets/404-illustration.png"
