@@ -1,0 +1,12 @@
+{
+  "psi-header.variables": [["projectCreationYear", "2025"]],
+  "psi-header.templates": [
+    {
+      "language": "*",
+      "template": [
+        "This file is part of the EmbedMetrics public website.",
+        "© <<year>> Yuriy Plakosh. All rights reserved."
+      ]
+    }
+  ]
+}

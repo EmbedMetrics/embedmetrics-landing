@@ -1,3 +1,8 @@
+/*
+ * This file is part of the EmbedMetrics public website.
+ * © 2025 Yuriy Plakosh. All rights reserved.
+ */
+
 import { Helmet } from "react-helmet-async";
 
 export default function MetaHead() {

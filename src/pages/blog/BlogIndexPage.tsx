@@ -1,3 +1,8 @@
+/*
+ * This file is part of the EmbedMetrics public website.
+ * © 2025 Yuriy Plakosh. All rights reserved.
+ */
+
 import { Link } from "react-router-dom";
 import { blogPosts } from "./blog";
 import Header from "../../components/Header";

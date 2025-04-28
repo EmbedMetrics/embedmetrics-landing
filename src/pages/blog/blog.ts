@@ -1,3 +1,8 @@
+/*
+ * This file is part of the EmbedMetrics public website.
+ * © 2025 Yuriy Plakosh. All rights reserved.
+ */
+
 import { BlogPostMeta } from "../../model/BlogPostMeta";
 
 // Import your posts manually

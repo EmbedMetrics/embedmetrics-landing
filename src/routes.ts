@@ -1,4 +1,8 @@
-// src/routes.ts
+/*
+ * This file is part of the EmbedMetrics public website.
+ * © 2025 Yuriy Plakosh. All rights reserved.
+ */
+
 export interface RouteConfig {
   path: string;
   component: string;
