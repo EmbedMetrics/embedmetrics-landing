@@ -9,7 +9,7 @@
   <img alt="License" src="https://img.shields.io/badge/license-proprietary-blue" />
 </p>
 
-This repo contains the landing page for [**EmbedMetrics**](https://embedmetrics.com) — the AI-powered, embeddable analytics platform.
+This repo contains the **public marketing website** (landing page) for [**EmbedMetrics**](https://embedmetrics.com) — the AI-powered, embeddable analytics platform.
 
 > Let your users **ask questions** and get **visual answers** — all within your app.
 
