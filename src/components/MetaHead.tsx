@@ -28,6 +28,7 @@ export default function MetaHead() {
       <meta property="og:image" content="/embedmetrics-preview.png" />
       <meta property="og:url" content="https://embedmetrics.com" />
       <meta name="twitter:card" content="summary_large_image" />
+      <link rel="canonical" href="https://embedmetrics.com" />
     </Helmet>
   );
 }

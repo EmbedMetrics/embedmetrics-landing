@@ -25,6 +25,7 @@ export default function BlogMetaIndexHead() {
       <meta property="og:image" content="/assets/embedmetrics-preview.png" />
       <meta property="og:url" content="https://embedmetrics.com/blog" />
       <meta name="twitter:card" content="summary_large_image" />
+      <link rel="canonical" href="https://embedmetrics.com/blog" />
     </Helmet>
   );
 }

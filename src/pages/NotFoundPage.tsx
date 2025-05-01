@@ -7,10 +7,20 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const NotFoundPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen">
+      <Helmet>
+        <title>404 Not Found – EmbedMetrics</title>
+        <meta
+          name="description"
+          content="Sorry, the page you're looking for does not exist on EmbedMetrics."
+        />
+        <meta name="robots" content="noindex" />
+      </Helmet>
+
       {/* Header */}
       <Header />
 

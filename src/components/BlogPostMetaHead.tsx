@@ -44,6 +44,7 @@ export default function BlogMetaHead({ post }: Props) {
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImg} />
       <meta name="twitter:image:alt" content={imageAlt} />
+      <link rel="canonical" href={url} />
     </Helmet>
   );
 }

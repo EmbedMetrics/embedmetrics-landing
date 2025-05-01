@@ -7,10 +7,12 @@ import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ContentContainer from "../components/ContentContainer";
+import LegalMetaHead from "../components/LegalMetaHead";
 
 export default function PrivacyPolicyPage() {
   return (
     <>
+      <LegalMetaHead page="privacy" />
       <Header />
       <ContentContainer>
         <main className="max-w-3xl mx-auto px-4 py-16 text-gray-800 text-sm leading-relaxed">
