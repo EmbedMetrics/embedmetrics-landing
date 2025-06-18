@@ -24,18 +24,6 @@ export const routes: RouteConfig[] = [
     changefreq: "weekly",
   },
   {
-    path: "/blog/why-embedmetrics",
-    component: "WhyEmbedMetricsPage",
-    priority: 0.7,
-    changefreq: "monthly",
-  },
-  {
-    path: "/blog/vp-sales-weekly-review-without-dashboards",
-    component: "VpSalesWeeklyReviewPage",
-    priority: 0.7,
-    changefreq: "monthly",
-  },
-  {
     path: "/terms",
     component: "TermsPage",
     priority: 0.3,
@@ -46,5 +34,11 @@ export const routes: RouteConfig[] = [
     component: "PrivacyPage",
     priority: 0.3,
     changefreq: "yearly",
+  },
+  {
+    path: "/blog/:slug",
+    component: "BlogPostDynamicPage",
+    priority: 0.7,
+    changefreq: "monthly",
   },
 ];

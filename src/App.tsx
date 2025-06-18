@@ -7,18 +7,16 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
 import LandingPage from "./pages/LandingPage";
-import WhyEmbedMetricsPage from "./pages/blog/WhyEmbedMetricsPage";
-import VpSalesWeeklyReviewPage from "./pages/blog/VpSalesWeeklyReviewPage";
 import BlogIndexPage from "./pages/blog/BlogIndexPage";
 import TermsPage from "./pages/TermsOfServicePage";
 import PrivacyPage from "./pages/PrivacyPolicyPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import BlogPostDynamicPage from "./pages/blog/BlogPostDynamicPage";
 
 const components = {
   LandingPage,
   BlogIndexPage,
-  WhyEmbedMetricsPage,
-  VpSalesWeeklyReviewPage,
+  BlogPostDynamicPage,
   TermsPage,
   PrivacyPage,
 };
