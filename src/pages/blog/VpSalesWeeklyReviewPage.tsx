@@ -2,21 +2,25 @@
  * This file is part of the EmbedMetrics public website.
  * © 2025 Yuriy Plakosh. All rights reserved.
  */
-
 import BlogPostLayout from "../../components/BlogPostLayout";
-import { blogPosts } from "./blog";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BlogMetaHead from "../../components/BlogPostMetaHead";
-
-import rawContent from "./2025-04-22-why-embedmetrics.mdx?raw";
+import rawContent from "./2025-06-17-vp-sales-weekly-review-without-dashboards.mdx?raw";
 import ContentContainer from "../../components/ContentContainer";
+import { blogMeta } from "./blogMeta";
+import VpSalesWeeklyReviewContent from "./2025-06-17-vp-sales-weekly-review-without-dashboards.mdx";
 
-const post = blogPosts.find((p) => p.slug === "why-embedmetrics");
+const post = {
+  ...blogMeta.find(
+    (m) => m.slug === "vp-sales-weekly-review-without-dashboards"
+  ),
+  component: VpSalesWeeklyReviewContent,
+};
 const wordCount = rawContent.split(/\s+/).length;
 const readTime = Math.max(1, Math.ceil(wordCount / 200));
 
-export default function WhyEmbedMetricsPage() {
+export default function VpSalesWeeklyReviewPage() {
   return (
     <>
       <BlogMetaHead post={post} />
@@ -33,7 +37,7 @@ export default function WhyEmbedMetricsPage() {
           imageAlt={post.imageAlt}
           readTime={readTime}
         >
-          <post.component />
+          <VpSalesWeeklyReviewContent />
         </BlogPostLayout>
       </ContentContainer>
       <Footer />

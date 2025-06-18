@@ -30,6 +30,12 @@ export const routes: RouteConfig[] = [
     changefreq: "monthly",
   },
   {
+    path: "/blog/vp-sales-weekly-review-without-dashboards",
+    component: "VpSalesWeeklyReviewPage",
+    priority: 0.7,
+    changefreq: "monthly",
+  },
+  {
     path: "/terms",
     component: "TermsPage",
     priority: 0.3,

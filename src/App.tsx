@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
 import LandingPage from "./pages/LandingPage";
 import WhyEmbedMetricsPage from "./pages/blog/WhyEmbedMetricsPage";
+import VpSalesWeeklyReviewPage from "./pages/blog/VpSalesWeeklyReviewPage";
 import BlogIndexPage from "./pages/blog/BlogIndexPage";
 import TermsPage from "./pages/TermsOfServicePage";
 import PrivacyPage from "./pages/PrivacyPolicyPage";
@@ -17,6 +18,7 @@ const components = {
   LandingPage,
   BlogIndexPage,
   WhyEmbedMetricsPage,
+  VpSalesWeeklyReviewPage,
   TermsPage,
   PrivacyPage,
 };
@@ -55,8 +57,7 @@ function App() {
       <Routes>
         {routes.map(({ path, component }) => {
           const Component =
-            components[component as keyof typeof components] ||
-            NotFoundComponent;
+            components[component as keyof typeof components] || NotFoundPage;
           return <Route key={path} path={path} element={<Component />} />;
         })}
         {/* Catch-all route for 404 */}
