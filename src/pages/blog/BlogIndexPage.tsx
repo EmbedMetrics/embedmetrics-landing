@@ -11,6 +11,16 @@ import BlogMetaIndexHead from "../../components/BlogMetaIndexHead";
 import ContentContainer from "../../components/ContentContainer";
 
 export default function BlogIndexPage() {
+  // Format date as 'Month Day, Year' with UTC handling
+  const formatDate = (dateString: string) => {
+    return new Date(dateString + "T00:00:00.000Z").toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      timeZone: "UTC",
+    });
+  };
+
   return (
     <>
       <BlogMetaIndexHead />
@@ -55,7 +65,9 @@ export default function BlogIndexPage() {
                     <p className="text-sm text-gray-600 line-clamp-3 mb-2">
                       {post.excerpt}
                     </p>
-                    <p className="text-sm text-gray-400">{post.date}</p>
+                    <p className="text-sm text-gray-400">
+                      {formatDate(post.date)}
+                    </p>
                   </div>
                 </Link>
               </article>
