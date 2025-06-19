@@ -93,14 +93,14 @@ export function EarlyAccessProvider({
               </p>
             ) : (
               <form
-                name="early-access"
+                name="early-access-v2"
                 method="POST"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
                 className="flex flex-col gap-4"
               >
-                <input type="hidden" name="form-name" value="early-access" />
+                <input type="hidden" name="form-name" value="early-access-v2" />
                 <input
                   type="text"
                   name="name"
