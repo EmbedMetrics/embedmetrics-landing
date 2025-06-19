@@ -1,12 +1,9 @@
-import { image } from "framer-motion/client";
-
 // Blog post metadata shared between blog index and post pages
 export const blogMeta = [
   {
     slug: "why-embedmetrics",
     title: "Why I'm Building EmbedMetrics (and What's Coming Next)",
-    date: "2025-04-22",
-    // image: "/assets/developer-using-embedmetrics-why-embedmetrics.png",
+    date: "2025-06-18",
     image: "/assets/EmbedMetrics-embeded-into-CRM-application.png",
     imageAlt:
       "Screenshot showing the EmbedMetrics Smart Assistant embedded inside a CRM dashboard. The assistant responds to a query about MRR trends for the current quarter with a line chart showing January to March data.",
@@ -18,7 +15,7 @@ export const blogMeta = [
   {
     slug: "vp-sales-weekly-review-without-dashboards",
     title: "How a VP of Sales Runs Her Weekly Review Without Dashboards",
-    date: "2025-06-17",
+    date: "2025-06-18",
     image:
       "/assets/Lina-using-EmbedMetrics-for-regional-performance-review.png",
     imageAlt: "VP of Sales reviewing regional performance via AI assistant",

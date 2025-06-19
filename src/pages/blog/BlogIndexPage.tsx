@@ -4,7 +4,7 @@
  */
 
 import { Link } from "react-router-dom";
-import { blogPosts } from "./blog";
+import { blogMeta } from "./blogMeta";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BlogMetaIndexHead from "../../components/BlogMetaIndexHead";
@@ -23,8 +23,8 @@ export default function BlogIndexPage() {
               Insights from the Team Behind EmbedMetrics
             </h1>
             <p className="text-base text-gray-600 max-w-2xl mx-auto">
-              We’re sharing the journey of building AI-native, developer-first
-              embedded analytics — and everything we’re learning along the way.
+              We're sharing the journey of building AI-native, developer-first
+              embedded analytics — and everything we're learning along the way.
             </p>
           </header>
 
@@ -35,7 +35,7 @@ export default function BlogIndexPage() {
 
           {/* Posts */}
           <div className="flex justify-center md:grid md:grid-cols-2 gap-8">
-            {blogPosts.map((post) => (
+            {blogMeta.map((post) => (
               <article
                 key={post.slug}
                 className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition transform max-w-md w-full"
