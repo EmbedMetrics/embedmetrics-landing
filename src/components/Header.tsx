@@ -5,6 +5,7 @@
 
 import { Link } from "react-router-dom";
 import logo from "../assets/EmbedMetrics.svg";
+import Booker from "./Booker";
 
 export default function Header() {
   return (
@@ -16,13 +17,11 @@ export default function Header() {
         </span>
       </Link>
 
-      <nav className="text-base">
-        <Link to="/" className="text-gray-700 hover:text-indigo-600 mr-6">
-          Home
-        </Link>
+      <nav className="text-base flex items-center space-x-6">
         <Link to="/blog" className="text-gray-700 hover:text-indigo-600">
           Blog
         </Link>
+        <Booker />
       </nav>
     </header>
   );

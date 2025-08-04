@@ -11,11 +11,9 @@ import MetaHead from "../components/MetaHead";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ContentContainer from "../components/ContentContainer";
-import { useEarlyAccess } from "../components/EarlyAccessContext";
+import Booker from "../components/Booker";
 
 function LandingPage() {
-  const { open } = useEarlyAccess();
-
   return (
     <>
       <MetaHead />
@@ -57,14 +55,12 @@ function LandingPage() {
               </p>
 
               <div>
-                <motion.button
+                <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={open}
-                  className="bg-indigo-600 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-indigo-700 transition cursor-pointer"
                 >
-                  Get Early Access
-                </motion.button>
+                  <Booker />
+                </motion.div>
               </div>
             </motion.div>
           </section>

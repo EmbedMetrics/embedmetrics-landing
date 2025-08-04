@@ -45,13 +45,13 @@ export default function TermsOfServicePage() {
           </p>
 
           <h2 className="text-lg font-semibold mt-8 mb-2">
-            3. Early Access and Feedback
+            3. Demo and Feedback
           </h2>
           <p className="mb-4">
-            If you participate in our early access program, you agree not to
-            publicly disclose features unless otherwise permitted. You may
-            submit feedback or suggestions, which we may use without obligation
-            or compensation.
+            If you participate in our demo program, you agree not to publicly
+            disclose features unless otherwise permitted. You may submit
+            feedback or suggestions, which we may use without obligation or
+            compensation.
           </p>
 
           <h2 className="text-lg font-semibold mt-8 mb-2">

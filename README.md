@@ -17,12 +17,12 @@ This repo contains the **public marketing website** (landing page) for [**EmbedM
 
 👉 Visit us at: [https://embedmetrics.com](https://embedmetrics.com)
 
-## 📬 Get Early Access
+## 📬 Book a Demo
 
 We're currently in development and onboarding early users.  
-Want to try it out or chat about your use case?
+Want to see it in action or chat about your use case?
 
-👉 [Request early access](https://embedmetrics.com) or email us at [hello@embedmetrics.com](mailto:hello@embedmetrics.com)
+👉 [Book a demo](https://embedmetrics.com) or email us at [hello@embedmetrics.com](mailto:hello@embedmetrics.com)
 
 ## 🔍 What It Does
 

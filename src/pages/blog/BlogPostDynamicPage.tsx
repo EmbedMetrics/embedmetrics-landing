@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 import BlogMetaHead from "../../components/BlogPostMetaHead";
 import ContentContainer from "../../components/ContentContainer";
 import React, { useRef, useEffect, useState } from "react";
-import { EarlyAccessLink } from "./MDXComponents";
+import { BookDemoLink } from "./MDXComponents";
 
 // Dynamically import all MDX files in this folder
 const mdxModules = import.meta.glob("./*.mdx", { eager: true });
@@ -82,7 +82,7 @@ export default function BlogPostDynamicPage() {
         >
           <div ref={contentRef}>
             {/* @ts-expect-error MDX types do not declare 'components' prop, but it works at runtime */}
-            <PostComponent components={{ EarlyAccessLink }} />
+            <PostComponent components={{ BookDemoLink }} />
           </div>
         </BlogPostLayout>
       </ContentContainer>

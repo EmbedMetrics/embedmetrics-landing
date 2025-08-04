@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
     "@fontsource/inter": "^5.2.5",
     "@mdx-js/react": "^3.1.0",
     "framer-motion": "^12.6.2",
