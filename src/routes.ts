@@ -18,6 +18,12 @@ export const routes: RouteConfig[] = [
     changefreq: "weekly",
   },
   {
+    path: "/about",
+    component: "AboutPage",
+    priority: 0.9,
+    changefreq: "monthly",
+  },
+  {
     path: "/blog",
     component: "BlogIndexPage",
     priority: 0.8,

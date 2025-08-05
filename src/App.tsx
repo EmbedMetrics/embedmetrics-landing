@@ -7,6 +7,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
 import LandingPage from "./pages/LandingPage";
+import AboutPage from "./pages/AboutPage";
 import BlogIndexPage from "./pages/blog/BlogIndexPage";
 import TermsPage from "./pages/TermsOfServicePage";
 import PrivacyPage from "./pages/PrivacyPolicyPage";
@@ -15,6 +16,7 @@ import BlogPostDynamicPage from "./pages/blog/BlogPostDynamicPage";
 
 const components = {
   LandingPage,
+  AboutPage,
   BlogIndexPage,
   BlogPostDynamicPage,
   TermsPage,
