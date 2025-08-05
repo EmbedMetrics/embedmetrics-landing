@@ -10,11 +10,7 @@ export function BookDemoLink({ children }: { children: React.ReactNode }) {
       data-cal-namespace="embedmetrics-demo"
       data-cal-link="yuriy-plakosh/embedmetrics-demo"
       data-cal-config='{"layout":"month_view"}'
-      style={{
-        color: "#6366f1",
-        textDecoration: "underline",
-        cursor: "pointer",
-      }}
+      className="text-indigo-600 hover:text-indigo-800 underline cursor-pointer"
     >
       {children}
     </a>
