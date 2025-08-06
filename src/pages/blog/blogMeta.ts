@@ -8,7 +8,7 @@ export const blogMeta = [
     imageAlt:
       "EmbedMetrics Smart Assistant inside a CRM dashboard, answering a query about MRR trends with a line chart.",
     description:
-      "Dashboards are dying. EmbedMetrics is a smart, embeddable AI assistant that replaces dashboards with answers, built for SaaS teams and developers.",
+      "Dashboards are at a turning point. EmbedMetrics is a smart, AI-native assistant that replaces static dashboards with in-app answers, built for SaaS teams and developers.",
     excerpt:
       "Dashboards have become a wall instead of a window. This is the story behind EmbedMetrics—an AI-native assistant that replaces static dashboards with smart, in-app answers.",
   },
