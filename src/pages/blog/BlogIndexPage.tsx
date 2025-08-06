@@ -44,7 +44,7 @@ export default function BlogIndexPage() {
           </p>
 
           {/* Posts */}
-          <div className="flex justify-center md:grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {blogMeta.map((post) => (
               <article
                 key={post.slug}
