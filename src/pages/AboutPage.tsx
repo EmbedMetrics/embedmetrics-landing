@@ -149,12 +149,21 @@ export default function AboutPage() {
 
             <h2>From the Founder</h2>
 
-            <p>
-              I'm Yuriy Plakosh, the founder of EmbedMetrics. I've built data
-              platforms for SaaS and enterprise teams. I started this product
-              because I believe analytics should feel like asking a smart
-              teammate, not building a dashboard.
-            </p>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-6">
+              <img
+                src="/assets/yuriy.jpg"
+                alt="Yuriy Plakosh, Founder of EmbedMetrics"
+                className="w-24 h-24 sm:w-32 sm:h-32 rounded-full object-cover flex-shrink-0"
+              />
+              <div>
+                <p>
+                  I'm Yuriy Plakosh, the founder of EmbedMetrics. I've built
+                  data platforms for SaaS and enterprise teams. I started this
+                  product because I believe analytics should feel like asking a
+                  smart teammate, not building a dashboard.
+                </p>
+              </div>
+            </div>
 
             <p>
               This is a founder-led, product-driven effort grounded in
@@ -165,10 +174,10 @@ export default function AboutPage() {
 
             <p>
               We're currently rolling out to select SaaS teams.
-              <strong>
+              <span className="block mt-2 font-medium">
                 Want to embed AI-native analytics in your app?{" "}
                 <BookDemoLink>Book a demo</BookDemoLink>
-              </strong>
+              </span>
             </p>
           </article>
         </main>
