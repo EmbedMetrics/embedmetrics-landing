@@ -118,7 +118,7 @@ function LandingPage() {
             <img
               src="/assets/chat-screenshot.png"
               alt="EmbedMetrics chat example with bar chart"
-              className="rounded-xl shadow-md mx-auto"
+              className="rounded-xl shadow-md shadow-indigo-100 border border-indigo-100 mx-auto"
             />
           </section>
 
