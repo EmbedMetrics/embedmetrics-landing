@@ -37,7 +37,7 @@ function LandingPage() {
               >
                 AI-native analytics that lives inside your app
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 max-w-xl mb-2 px-4">
+              <p className="sm:text-lg text-gray-600 max-w-xl mb-2 px-4">
                 Drop in a chat widget. Let users ask questions in plain English.
                 Get instant answers, not dashboards.
               </p>
@@ -59,7 +59,7 @@ function LandingPage() {
             <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-2">
               Dashboards are at a turning point
             </h3>
-            <p className="text-gray-600">
+            <p className="sm:text-lg text-gray-600 mb-2 px-4">
               Most users don’t open them. They just want quick answers.
               EmbedMetrics brings answers directly into your app, without the
               need to build or maintain dashboards.
@@ -112,8 +112,8 @@ function LandingPage() {
               What it looks like
             </h2>
             <p className="text-gray-600 mb-6">
-              Ask a plain-English question. Get an instant, visual
-              answer—powered by your data.
+              Ask a plain-English question. Get an instant, visual answer,
+              powered by your data.
             </p>
             <img
               src="/assets/chat-screenshot.png"
