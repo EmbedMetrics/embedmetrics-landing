@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { routes } from "./routes";
 import LandingPage from "./pages/LandingPage";
 import AboutPage from "./pages/AboutPage";
@@ -22,6 +22,17 @@ const components = {
   TermsPage,
   PrivacyPage,
 };
+
+// Scroll to top component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   // Validate components at runtime once
@@ -54,6 +65,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {routes.map(({ path, component }) => {
           const Component =
