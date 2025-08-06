@@ -14,14 +14,15 @@ export const blogMeta = [
   },
   {
     slug: "vp-sales-weekly-review-without-dashboards",
-    title: "How a VP of Sales Runs Her Weekly Review Without Dashboards",
+    title:
+      "How a VP of Sales Runs Her Weekly Performance Review Without Dashboards",
     date: "2025-06-18",
     image:
       "/assets/Lina-using-EmbedMetrics-for-regional-performance-review.png",
     imageAlt: "VP of Sales reviewing regional performance via AI assistant",
     description:
-      "Skip dashboards. Ask questions. Get answers. See how a global sales leader reviews performance using conversational analytics.",
+      "Skip dashboards. See how a global VP of Sales reviews weekly performance using an embedded, AI-native assistant that delivers real-time answers from data.",
     excerpt:
-      "Walk through a week-in-the-life of a VP of Sales who runs her reviews without dashboards—using an embedded, AI-native assistant instead.",
+      "Walk through a VP of Sales’ weekly workflow. No dashboards, just in-app answers from a smart, AI-native assistant.",
   },
 ];
