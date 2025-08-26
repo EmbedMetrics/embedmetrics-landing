@@ -25,11 +25,22 @@ const components = {
 
 // Scroll to top component
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // If there's a hash, let the browser handle scrolling to the anchor
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash.slice(1));
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      // Only scroll to top if there's no hash
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
   return null;
 }

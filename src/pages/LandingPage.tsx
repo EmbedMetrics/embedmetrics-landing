@@ -225,13 +225,23 @@ token='YOUR_TOKEN' />`}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: i * 0.15 }}
                 >
-                  <Icon className="w-10 h-10 text-indigo-600 mb-4" />
+                  <Icon className="w-8 h-8 text-indigo-600 mb-4" />
                   <h3 className="text-sm sm:text-lg font-semibold mb-2">
                     {title}
                   </h3>
                   <div className="text-gray-600">{desc}</div>
                 </motion.div>
               ))}
+            </div>
+            <div className="text-center mt-8">
+              <p className="text-sm text-indigo-600">
+                <a
+                  href="/about#how-it-works"
+                  className="hover:text-indigo-700 transition-colors"
+                >
+                  See the full flow →
+                </a>
+              </p>
             </div>
           </div>
 
@@ -330,6 +340,14 @@ token='YOUR_TOKEN' />`}
                   <p className="text-sm text-gray-500">
                     – Yuriy Plakosh, Founder
                   </p>
+                  <p className="text-sm text-indigo-600 mt-4">
+                    <a
+                      href="/about#how-it-works"
+                      className="hover:text-indigo-700 transition-colors"
+                    >
+                      Learn how it works →
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -342,7 +360,7 @@ token='YOUR_TOKEN' />`}
                 <h2 className="sm:text-3xl font-semibold text-gray-900 mb-8">
                   Built for Product Teams
                 </h2>
-                <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                   {[
                     <>
                       <strong>Native UX</strong>: Themeable React component
@@ -352,8 +370,8 @@ token='YOUR_TOKEN' />`}
                     </>,
                     <>
                       <strong>Flexible Data</strong>: Start with a scoped
-                      dataset upload via API to give users instant answers.
-                      Designed to scale to live data sources as your needs grow.
+                      dataset upload via API so users get instant answers.
+                      Designed to scale to live sources as your needs grow.
                     </>,
                     <>
                       <strong>Multi‑turn</strong>: Follow‑ups stay in context
@@ -367,6 +385,39 @@ token='YOUR_TOKEN' />`}
                       <p className="text-gray-700">{text}</p>
                     </div>
                   ))}
+                </div>
+
+                {/* Who it's for micro-row */}
+                <div className="bg-white rounded-xl ring-1 ring-black/8 p-6 shadow-sm">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                    Who it's for
+                  </h3>
+                  <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    {[
+                      {
+                        title: "SaaS platforms",
+                        desc: "that want native, insight-driven UX",
+                      },
+                      {
+                        title: "Enterprise teams",
+                        desc: "replacing dashboards with in-context answers",
+                      },
+                      {
+                        title: "Product and data teams",
+                        desc: "who want to reduce friction and shorten the path to insight",
+                      },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-indigo-600 mt-0.5 flex-shrink-0" />
+                        <p className="text-gray-700">
+                          <strong className="text-gray-900">
+                            {item.title}
+                          </strong>{" "}
+                          {item.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -388,6 +439,10 @@ token='YOUR_TOKEN' />`}
                     </>,
                     "Your data is never sold or shared",
                     "Clear data handling docs available on request",
+                    <>
+                      <strong>Structured, rule-based query generation</strong>{" "}
+                      for consistent, reviewable outputs
+                    </>,
                   ].map((text, i) => (
                     <div
                       key={i}
