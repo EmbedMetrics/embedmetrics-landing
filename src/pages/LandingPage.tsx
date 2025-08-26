@@ -29,18 +29,12 @@ export default function LandingPage() {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
-
-    const id = window.setInterval(() => {
-      setSlideIndex((i) => (i + 1) % carouselImages.length);
-    }, 5000);
-    setIntervalId(id);
+    startCarousel();
     return () => {
-      window.clearInterval(id);
-      setIntervalId(null);
+      if (intervalId) {
+        window.clearInterval(intervalId);
+        setIntervalId(null);
+      }
     };
   }, []);
 
@@ -68,15 +62,23 @@ export default function LandingPage() {
     }
   };
 
-  const resumeCarousel = () => {
+  const startCarousel = () => {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    if (!prefersReduced && !intervalId) {
+    if (prefersReduced) return;
+
+    if (!intervalId) {
       const id = window.setInterval(() => {
         setSlideIndex((i) => (i + 1) % carouselImages.length);
-      }, 5000);
+      }, 8000);
       setIntervalId(id);
+    }
+  };
+
+  const resumeCarousel = () => {
+    if (!intervalId) {
+      startCarousel();
     }
   };
 
