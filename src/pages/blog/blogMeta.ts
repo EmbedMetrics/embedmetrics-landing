@@ -1,6 +1,18 @@
 // Blog post metadata shared between blog index and post pages
 export const blogMeta = [
   {
+    slug: "ai-native-analytics",
+    title: 'What Does "AI-Native Analytics" Really Mean?',
+    date: "2025-08-26",
+    image: "/assets/AI-Native-Analytics-conversational-interface.png",
+    imageAlt:
+      "Developer embedding an AI-native analytics assistant directly inside a SaaS app interface.",
+    description:
+      "AI-powered and AI-first analytics still orbit around dashboards. AI-native is different—built ground-up for conversational workflows, embedded directly into SaaS apps.",
+    excerpt:
+      "Explore why AI-native analytics is more than AI on top of BI. It’s a ground-up redesign: embedded, conversational, and built for the next generation of SaaS.",
+  },
+  {
     slug: "why-embedmetrics",
     title: "Why EmbedMetrics",
     date: "2025-06-18",
