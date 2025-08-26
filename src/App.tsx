@@ -33,7 +33,12 @@ function ScrollToTop() {
       setTimeout(() => {
         const element = document.getElementById(hash.slice(1));
         if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+          const prefersReduced = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches;
+          element.scrollIntoView({
+            behavior: prefersReduced ? "auto" : "smooth",
+          });
         }
       }, 100);
     } else {

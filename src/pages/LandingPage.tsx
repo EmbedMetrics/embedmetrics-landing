@@ -141,12 +141,11 @@ export default function LandingPage() {
                   />
                   <img
                     src="/assets/Acme_Analytics_Welcome.png"
-                    width="1440"
-                    height="920"
-                    alt="EmbedMetrics answering with KPIs, chart, and follow-ups inside your app"
+                    width={1920}
+                    height={1080}
+                    alt="EmbedMetrics showing KPIs, a chart, and follow-up prompts inside an app"
                     decoding="async"
                     loading="eager"
-                    fetchPriority="high"
                     className="w-full rounded-2xl shadow-xl ring-1 ring-black/10"
                   />
                 </picture>
@@ -440,8 +439,8 @@ token='YOUR_TOKEN' />`}
                     "Your data is never sold or shared",
                     "Clear data handling docs available on request",
                     <>
-                      <strong>Structured, rule-based query generation</strong>{" "}
-                      for consistent, reviewable outputs
+                      <strong>Structured processing pipeline</strong> for
+                      consistent, reviewable outputs
                     </>,
                   ].map((text, i) => (
                     <div

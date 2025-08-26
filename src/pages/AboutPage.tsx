@@ -70,11 +70,17 @@ export default function AboutPage() {
         {/* Lightweight Anchor Navigation - Outside overflow-hidden container */}
         <div className="sticky top-20 z-20 mb-8">
           <div className="bg-white/90 backdrop-blur-sm rounded-full shadow-sm ring-1 ring-black/5 px-6 py-3 mx-auto w-fit">
-            <nav className="flex items-center gap-6 text-sm">
+            <nav
+              aria-label="About sections"
+              className="flex items-center gap-6 text-sm"
+            >
               {navItems.map((item, index) => (
                 <React.Fragment key={item.id}>
                   <a
                     href={`#${item.id}`}
+                    aria-current={
+                      activeSection === item.id ? "true" : undefined
+                    }
                     className={`transition-colors ${
                       activeSection === item.id
                         ? "text-indigo-600 font-semibold"
@@ -431,6 +437,9 @@ export default function AboutPage() {
                       <img
                         src="/assets/yuriy.jpg"
                         alt="Yuriy Plakosh, Founder of EmbedMetrics"
+                        width={256}
+                        height={256}
+                        loading="lazy"
                         className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover shadow-sm shadow-indigo-200 ring-2 ring-white"
                       />
                     </div>

@@ -71,7 +71,15 @@
 
 /* Focus styles for accessibility */
 :focus-visible {
-  outline: none;
+  outline: none; /* reset */
+}
+
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   box-shadow: 0 0 0 3px rgb(99 102 241 / 0.6);
   border-radius: 12px;
 }
