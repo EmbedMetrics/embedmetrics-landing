@@ -4,7 +4,6 @@ import BlogPostLayout from "../../components/BlogPostLayout";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BlogMetaHead from "../../components/BlogPostMetaHead";
-import ContentContainer from "../../components/ContentContainer";
 import React, { useRef, useEffect, useState } from "react";
 import { BookDemoLink } from "./MDXComponents";
 
@@ -41,14 +40,18 @@ export default function BlogPostDynamicPage() {
     return (
       <>
         <Header />
-        <ContentContainer>
-          <div className="py-24 text-center">
-            <h1 className="text-2xl font-bold mb-4">Post Not Found</h1>
-            <p className="text-gray-600">
-              Sorry, we couldn't find that blog post.
-            </p>
+        <div className="relative min-h-screen flex flex-col bg-gradient-to-b from-white to-indigo-50 text-gray-800">
+          <div className="max-w-4xl mx-auto px-6 py-24 text-center">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-sm p-8 sm:p-10">
+              <h1 className="text-2xl font-bold mb-4 text-gray-900">
+                Post Not Found
+              </h1>
+              <p className="text-gray-600">
+                Sorry, we couldn't find that blog post.
+              </p>
+            </div>
           </div>
-        </ContentContainer>
+        </div>
         <Footer />
       </>
     );
@@ -68,24 +71,22 @@ export default function BlogPostDynamicPage() {
     <>
       <BlogMetaHead post={{ ...postMeta, component: PostComponent }} />
       <Header />
-      <ContentContainer>
-        <BlogPostLayout
-          date={formattedDate}
-          author={{
-            name: "Yuriy Plakosh",
-            avatar: "/assets/yuriy.jpg",
-            role: "Founder",
-          }}
-          image={postMeta.image}
-          imageAlt={postMeta.imageAlt}
-          readTime={readTime}
-        >
-          <div ref={contentRef}>
-            {/* @ts-expect-error MDX types do not declare 'components' prop, but it works at runtime */}
-            <PostComponent components={{ BookDemoLink }} />
-          </div>
-        </BlogPostLayout>
-      </ContentContainer>
+      <BlogPostLayout
+        date={formattedDate}
+        author={{
+          name: "Yuriy Plakosh",
+          avatar: "/assets/yuriy.jpg",
+          role: "Founder",
+        }}
+        image={postMeta.image}
+        imageAlt={postMeta.imageAlt}
+        readTime={readTime}
+      >
+        <div ref={contentRef}>
+          {/* @ts-expect-error MDX types do not declare 'components' prop, but it works at runtime */}
+          <PostComponent components={{ BookDemoLink }} />
+        </div>
+      </BlogPostLayout>
       <Footer />
     </>
   );
