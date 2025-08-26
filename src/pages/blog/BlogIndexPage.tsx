@@ -50,7 +50,7 @@ export default function BlogIndexPage() {
               <div className="em-hairline max-w-4xl mx-auto bg-white rounded-2xl shadow-sm ring-1 ring-black/8 p-8 sm:p-10">
                 <p className="text-lg text-gray-700 max-w-[65ch] mx-auto">
                   We're sharing the journey of building AI-native,
-                  developer-first embedded analytics — and everything we're
+                  developer-first embedded analytics, and everything we're
                   learning along the way.
                 </p>
               </div>
