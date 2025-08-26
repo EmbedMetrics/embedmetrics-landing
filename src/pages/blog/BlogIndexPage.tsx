@@ -98,7 +98,6 @@ export default function BlogIndexPage() {
                         sizes="(min-width:1024px) 320px, (min-width:768px) 45vw, 100vw"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         loading={index === 0 ? "eager" : "lazy"}
-                        fetchPriority={index === 0 ? "high" : "auto"}
                         decoding="async"
                       />
                     </div>
