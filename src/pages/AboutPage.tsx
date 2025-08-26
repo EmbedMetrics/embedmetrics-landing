@@ -67,8 +67,8 @@ export default function AboutPage() {
       <div className="relative min-h-screen flex flex-col bg-gradient-to-b from-white to-indigo-50 text-gray-800">
         <Header />
 
-        {/* Lightweight Anchor Navigation - Outside overflow-hidden container */}
-        <div className="sticky top-20 z-20 mb-8">
+        {/* Lightweight Anchor Navigation - Hidden on mobile, visible on desktop */}
+        <div className="hidden md:block lg:block sticky top-20 z-20 mb-8">
           <div className="bg-white/90 backdrop-blur-sm rounded-full shadow-sm ring-1 ring-black/5 px-6 py-3 mx-auto w-fit">
             <nav
               aria-label="About sections"
