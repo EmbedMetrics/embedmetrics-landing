@@ -9,6 +9,7 @@ import App from "./App";
 import "./index.css";
 import { HelmetProvider } from "react-helmet-async";
 import { BookDemoProvider } from "./components/BookDemoContext";
+import "./styles/accents.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
