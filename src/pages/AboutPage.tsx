@@ -10,13 +10,16 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ContentContainer from "../components/ContentContainer";
 import AboutMetaHead from "../components/AboutMetaHead";
-import { BookDemoLink } from "./blog/MDXComponents";
+import { useAnalytics } from "../hooks/useAnalytics";
+import Booker from "../components/Booker";
 
 export default function AboutPage() {
+  const { trackFeatureInterest, trackCTAClick } = useAnalytics();
   const [activeSection, setActiveSection] = React.useState<string>("");
+  const seen = React.useRef<Set<string>>(new Set());
 
   React.useEffect(() => {
-    const sections = [
+    const sectionIds = [
       "what",
       "mission",
       "why-now",
@@ -25,6 +28,9 @@ export default function AboutPage() {
       "how-it-works",
       "founder",
     ];
+    const els = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -32,24 +38,23 @@ export default function AboutPage() {
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
         if (visible[0]) {
-          setActiveSection(visible[0].target.id);
+          const el = visible[0].target as HTMLElement;
+          const feature = el.dataset.feature || el.id; // ← prefer data-feature
+          setActiveSection(el.id);
+          if (feature && !seen.current.has(feature)) {
+            seen.current.add(feature);
+            trackFeatureInterest(feature);
+            observer.unobserve(el); // optional performance optimization
+          }
         }
       },
-      {
-        rootMargin: "-20% 0px -70% 0px", // Trigger when section is in the middle third of viewport
-        threshold: 0.1,
-      }
+      { root: null, rootMargin: "-20% 0px -70% 0px", threshold: 0.4 }
     );
 
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        observer.observe(element);
-      }
-    });
+    els.forEach((el) => observer.observe(el));
 
     return () => observer.disconnect();
-  }, []);
+  }, [trackFeatureInterest]);
 
   const navItems = [
     { id: "what", label: "What" },
@@ -86,6 +91,12 @@ export default function AboutPage() {
                         ? "text-indigo-600 font-semibold"
                         : "text-gray-600 hover:text-indigo-600"
                     }`}
+                    onClick={() =>
+                      trackCTAClick("about-toc", item.label, {
+                        is_navigation: true,
+                        destination_url: `#${item.id}`,
+                      })
+                    }
                   >
                     {item.label}
                   </a>
@@ -134,6 +145,7 @@ export default function AboutPage() {
               {/* What is EmbedMetrics */}
               <motion.section
                 id="what"
+                data-feature="about-what"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -193,6 +205,7 @@ export default function AboutPage() {
               {/* Our Mission */}
               <motion.section
                 id="mission"
+                data-feature="about-mission"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
@@ -218,6 +231,7 @@ export default function AboutPage() {
               {/* Why Now */}
               <motion.section
                 id="why-now"
+                data-feature="about-why-now"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -267,6 +281,7 @@ export default function AboutPage() {
               {/* What Makes EmbedMetrics Different */}
               <motion.section
                 id="different"
+                data-feature="about-different"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -326,6 +341,7 @@ export default function AboutPage() {
               {/* Who We're For */}
               <motion.section
                 id="who"
+                data-feature="about-who"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
@@ -377,6 +393,7 @@ export default function AboutPage() {
               {/* How It Works */}
               <motion.section
                 id="how-it-works"
+                data-feature="about-how-it-works"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
@@ -418,6 +435,7 @@ export default function AboutPage() {
               {/* From the Founder */}
               <motion.section
                 id="founder"
+                data-feature="about-founder"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7 }}
@@ -462,6 +480,7 @@ export default function AboutPage() {
 
               {/* Try EmbedMetrics */}
               <motion.section
+                data-feature="about-demo-cta"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
@@ -480,11 +499,16 @@ export default function AboutPage() {
                     Ready to embed AI-native analytics in your app?
                   </p>
                   <div className="bg-white rounded-xl p-6 ring-1 ring-indigo-200 shadow-sm max-w-md mx-auto">
-                    <BookDemoLink>
-                      <span className="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors w-full">
-                        Book a Demo
-                      </span>
-                    </BookDemoLink>
+                    <div
+                      onClick={() =>
+                        trackCTAClick("about", "Book a Demo", {
+                          content_type: "about",
+                          content_id: "demo-cta",
+                        })
+                      }
+                    >
+                      <Booker />
+                    </div>
                   </div>
                 </div>
               </motion.section>
