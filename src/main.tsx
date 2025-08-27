@@ -38,8 +38,15 @@ const app =
             (typeof navigator !== "undefined" &&
               (navigator as any).globalPrivacyControl === true); // GPC
 
-          // Respect an explicit opt-out; otherwise opt in (because we defaulted to opt out)
-          if (!dnt && !ph.has_opted_out_capturing()) {
+          // Don't override explicit user opt-out saved by our UI
+          const EXPLICIT_OPT_OUT_KEY = "em_explicit_opt_out";
+          let explicitOptOut = false;
+          try {
+            explicitOptOut = localStorage.getItem(EXPLICIT_OPT_OUT_KEY) === "1";
+          } catch {}
+
+          // Opt in when privacy signals are OFF (prevents missing first PV when defaulted to opt-out)
+          if (!dnt && !explicitOptOut) {
             ph.opt_in_capturing();
           }
         },

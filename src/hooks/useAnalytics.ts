@@ -40,6 +40,7 @@ export enum FunnelEvents {
   CTA_CLICK = "cta_click",
   DEMO_MODAL_OPEN = "demo_modal_open",
   DEMO_FORM_START = "demo_form_start",
+  DEMO_MODAL_CLOSE = "demo_modal_close",
 
   // Conversion
   DEMO_BOOKED = "demo_booked",
@@ -104,6 +105,11 @@ export interface FunnelProperties {
   state?: string;
   share_platform?: "x" | "facebook" | "linkedin" | "copy";
   read_time_minutes?: number;
+
+  // Demo modal context
+  started?: boolean;
+  last_step?: string;
+  duration_ms?: number;
 
   // Business context
   company_size?: string;
@@ -217,33 +223,52 @@ export function useAnalytics() {
   // Track page views with funnel context
   const trackPageView = useCallback(
     (pageName: string, properties?: Partial<FunnelProperties>) => {
-      const client = getClientOrSkip("page_view");
-      if (!client) return;
-
-      // Add lightweight context for better analytics queries
-      const extras: Partial<FunnelProperties> = {};
-      if (pageName === "blog-post") {
-        const m = window.location.pathname.match(/^\/blog\/([^\/?#]+)/);
-        if (m?.[1]) {
-          extras.content_type = "blog-post";
-          extras.content_id = m[1]; // slug
+      const trySend = (client: PostHog | any) => {
+        const extras: Partial<FunnelProperties> = {};
+        if (pageName === "blog-post") {
+          const m = window.location.pathname.match(/^\/blog\/([^\/?#]+)/);
+          if (m?.[1]) {
+            extras.content_type = "blog-post";
+            extras.content_id = m[1]; // slug
+          }
+        } else if (pageName === "not-found") {
+          extras.content_type = "not-found";
+          extras.content_id = window.location.pathname; // missing path
         }
-      } else if (pageName === "not-found") {
-        extras.content_type = "not-found";
-        extras.content_id = window.location.pathname; // missing path
+
+        client.capture(FunnelEvents.PAGE_VIEW, {
+          page_name: pageName,
+          funnel_stage: getFunnelStage(pageName),
+          previous_page: lastPageName || undefined,
+          ...baseProps(),
+          ...extras,
+          ...properties,
+        });
+        if (import.meta.env.DEV) {
+          console.debug("[Analytics] page_view sent", { pageName });
+        }
+        lastPageName = pageName; // update only after queuing the event
+      };
+
+      const client = getClientOrSkip("page_view");
+      if (client) {
+        trySend(client);
+      } else {
+        // One lightweight retry to catch initial opt-in races
+        setTimeout(() => {
+          const ph = (window as any).posthog;
+          const canCapture =
+            ph &&
+            (ph.has_opted_in_capturing?.() || !ph.has_opted_out_capturing?.());
+          if (canCapture) {
+            trySend(ph);
+          } else if (import.meta.env.DEV) {
+            console.debug(
+              "[Analytics] page_view retry skipped - PostHog not ready"
+            );
+          }
+        }, 350);
       }
-
-      client.capture(FunnelEvents.PAGE_VIEW, {
-        page_name: pageName,
-        funnel_stage: getFunnelStage(pageName),
-        previous_page: lastPageName || undefined,
-        ...baseProps(),
-        ...extras,
-        ...properties,
-      });
-
-      // Update internal SPA page tracking
-      lastPageName = pageName;
     },
     [posthog]
   );
@@ -287,7 +312,7 @@ export function useAnalytics() {
   // Track demo interest
   const trackDemoInterest = useCallback(
     (
-      action: "modal_open" | "form_start" | "form_complete",
+      action: "modal_open" | "form_start" | "form_complete" | "modal_close",
       properties?: Partial<FunnelProperties>
     ) => {
       const client = getClientOrSkip("demo_interest");
@@ -298,7 +323,9 @@ export function useAnalytics() {
           ? FunnelEvents.DEMO_MODAL_OPEN
           : action === "form_start"
           ? FunnelEvents.DEMO_FORM_START
-          : FunnelEvents.DEMO_BOOKED;
+          : action === "form_complete"
+          ? FunnelEvents.DEMO_BOOKED
+          : FunnelEvents.DEMO_MODAL_CLOSE;
 
       client.capture(eventName, {
         page_name: getCurrentPageName(),

@@ -16,7 +16,6 @@ import BlogPostDynamicPage from "./pages/blog/BlogPostDynamicPage";
 import { ScrollTracker } from "./components/ScrollTracker";
 import { ExitIntentTracker } from "./components/ExitIntentTracker";
 import { useAnalytics } from "./hooks/useAnalytics";
-import { isDNTActive } from "./hooks/useAnalytics";
 
 const components = {
   LandingPage,
@@ -36,38 +35,10 @@ function PageViewTracker() {
 
   React.useEffect(() => {
     if (lastPathRef.current === pathname) return;
+
     const pageName = getCurrentPageName();
-    const thisPath = pathname;
-
-    // Early-bail on DNT/GPC to prevent spinning for 2s
-    if (isDNTActive()) {
-      lastPathRef.current = pathname; // mark to avoid retry loops
-      return;
-    }
-
-    let tries = 0;
-    let cancelled = false;
-
-    const tick = () => {
-      if (cancelled) return;
-      const ph = (window as any).posthog;
-      const canCapture =
-        ph &&
-        (ph.has_opted_in_capturing?.() || !ph.has_opted_out_capturing?.());
-      if (canCapture) {
-        // only send if we're still on the same path
-        if (window.location.pathname === thisPath) {
-          trackPageView(pageName);
-          lastPathRef.current = thisPath; // mark only after send attempt
-        }
-      } else if (tries++ < 40) {
-        setTimeout(tick, 50); // up to ~2s
-      }
-    };
-    tick();
-    return () => {
-      cancelled = true;
-    };
+    trackPageView(pageName);
+    lastPathRef.current = pathname; // mark after attempt
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]); // depend only on pathname
 
