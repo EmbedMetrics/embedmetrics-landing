@@ -13,6 +13,9 @@ import TermsPage from "./pages/TermsOfServicePage";
 import PrivacyPage from "./pages/PrivacyPolicyPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import BlogPostDynamicPage from "./pages/blog/BlogPostDynamicPage";
+import { ScrollTracker } from "./components/ScrollTracker";
+import { ExitIntentTracker } from "./components/ExitIntentTracker";
+import { useAnalytics } from "./hooks/useAnalytics";
 
 const components = {
   LandingPage,
@@ -21,7 +24,24 @@ const components = {
   BlogPostDynamicPage,
   TermsPage,
   PrivacyPage,
+  NotFoundPage,
 };
+
+// Page view tracking component
+function PageViewTracker() {
+  const { trackPageView, getCurrentPageName } = useAnalytics();
+  const { pathname } = useLocation();
+  const lastPathRef = React.useRef<string | null>(null);
+
+  React.useEffect(() => {
+    if (lastPathRef.current === pathname) return; // prevent duplicates
+    lastPathRef.current = pathname;
+    trackPageView(getCurrentPageName());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]); // depend only on pathname
+
+  return null;
+}
 
 // Scroll to top component
 function ScrollToTop() {
@@ -82,6 +102,9 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <PageViewTracker />
+      <ScrollTracker />
+      <ExitIntentTracker />
       <Routes>
         {routes.map(({ path, component }) => {
           const Component =

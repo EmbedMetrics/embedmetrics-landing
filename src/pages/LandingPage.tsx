@@ -13,8 +13,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ContentContainer from "../components/ContentContainer";
 import Booker from "../components/Booker";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 export default function LandingPage() {
+  const { trackCTAClick, trackFeatureInterest } = useAnalytics();
+
   // Simple carousel state for the preview section
   const carouselImages = [
     "/assets/Acme_Analytics_1.png",
@@ -82,6 +85,31 @@ export default function LandingPage() {
     }
   };
 
+  // Track feature interest when features come into view
+  React.useEffect(() => {
+    const seen = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const featureName = entry.target.getAttribute("data-feature");
+          if (featureName && !seen.has(featureName)) {
+            seen.add(featureName);
+            trackFeatureInterest(featureName);
+            observer.unobserve(entry.target); // fire once per feature per page view
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    // Observe feature sections
+    const featureSections = document.querySelectorAll("[data-feature]");
+    featureSections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [trackFeatureInterest]);
+
   return (
     <>
       <MetaHead />
@@ -126,6 +154,7 @@ export default function LandingPage() {
                 whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto"
                 data-cta="book-demo-hero"
+                onClick={() => trackCTAClick("hero", "Book a Demo")}
               >
                 <Booker />
               </motion.div>
@@ -181,7 +210,10 @@ export default function LandingPage() {
           </section>
 
           {/* How It Works Section */}
-          <div className="em-hairline w-full max-w-6xl py-16 px-4 sm:px-6">
+          <div
+            className="em-hairline w-full max-w-6xl py-16 px-4 sm:px-6"
+            data-feature="how-it-works"
+          >
             <h2 className="sm:text-3xl font-semibold text-center text-gray-900 mb-12">
               How It Works
             </h2>
@@ -239,6 +271,9 @@ token='YOUR_TOKEN' />`}
                 <a
                   href="/about#how-it-works"
                   className="hover:text-indigo-700 transition-colors"
+                  onClick={() =>
+                    trackCTAClick("how-it-works", "See the full flow")
+                  }
                 >
                   See the full flow →
                 </a>
@@ -247,7 +282,10 @@ token='YOUR_TOKEN' />`}
           </div>
 
           {/* Product Preview Screenshot (carousel) */}
-          <section className="em-hairline w-full max-w-4xl mx-auto text-center px-6 py-16">
+          <section
+            className="em-hairline w-full max-w-4xl mx-auto text-center px-6 py-16"
+            data-feature="product-preview"
+          >
             <h2 className="sm:text-3xl font-semibold text-center text-gray-900 mb-12">
               What it looks like
             </h2>
@@ -279,12 +317,13 @@ token='YOUR_TOKEN' />`}
                 type="button"
                 aria-label="Previous"
                 data-cta="carousel-prev"
-                onClick={() =>
+                onClick={() => {
                   setSlideIndex(
                     (slideIndex - 1 + carouselImages.length) %
                       carouselImages.length
-                  )
-                }
+                  );
+                  trackCTAClick("carousel", "Previous slide");
+                }}
                 className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white shadow ring-1 ring-gray-200"
               >
                 ‹
@@ -293,9 +332,10 @@ token='YOUR_TOKEN' />`}
                 type="button"
                 aria-label="Next"
                 data-cta="carousel-next"
-                onClick={() =>
-                  setSlideIndex((slideIndex + 1) % carouselImages.length)
-                }
+                onClick={() => {
+                  setSlideIndex((slideIndex + 1) % carouselImages.length);
+                  trackCTAClick("carousel", "Next slide");
+                }}
                 className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/80 hover:bg-white shadow ring-1 ring-gray-200"
               >
                 ›
@@ -308,7 +348,10 @@ token='YOUR_TOKEN' />`}
                     aria-label={`Go to slide ${i + 1}`}
                     aria-pressed={i === slideIndex}
                     aria-controls="carousel-slide"
-                    onClick={() => setSlideIndex(i)}
+                    onClick={() => {
+                      setSlideIndex(i);
+                      trackCTAClick("carousel", `Go to slide ${i + 1}`);
+                    }}
                     className={`h-2 w-2 rounded-full transition-all ${
                       i === slideIndex ? "bg-indigo-600 w-4" : "bg-gray-300"
                     }`}
@@ -345,6 +388,9 @@ token='YOUR_TOKEN' />`}
                     <a
                       href="/about#how-it-works"
                       className="hover:text-indigo-700 transition-colors"
+                      onClick={() =>
+                        trackCTAClick("founder-quote", "Learn how it works")
+                      }
                     >
                       Learn how it works →
                     </a>
@@ -355,7 +401,10 @@ token='YOUR_TOKEN' />`}
           </section>
 
           {/* Built for Product Teams */}
-          <section className="em-hairline w-full px-6 py-16">
+          <section
+            className="em-hairline w-full px-6 py-16"
+            data-feature="product-teams"
+          >
             <div className="max-w-5xl mx-auto rounded-2xl em-section-wash-a">
               <div className="px-4 sm:px-6 py-8">
                 <h2 className="sm:text-3xl font-semibold text-gray-900 mb-8">
@@ -425,7 +474,10 @@ token='YOUR_TOKEN' />`}
           </section>
 
           {/* Trust & Security */}
-          <section className="em-hairline w-full px-6 py-16">
+          <section
+            className="em-hairline w-full px-6 py-16"
+            data-feature="trust-security"
+          >
             <div className="max-w-5xl mx-auto rounded-2xl em-section-wash-b">
               <div className="px-4 sm:px-6 py-8">
                 <h2 className="sm:text-3xl font-semibold text-gray-900 mb-8">
@@ -467,6 +519,7 @@ token='YOUR_TOKEN' />`}
               whileTap={{ scale: 0.95 }}
               className="w-full sm:w-auto"
               data-cta="book-demo-final"
+              onClick={() => trackCTAClick("final", "Book a Demo")}
             >
               <Booker />
             </motion.div>
