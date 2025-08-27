@@ -66,9 +66,7 @@ export default function Header() {
           About
         </Link>
         <div className="flex-shrink-0">
-          <div onClick={() => trackCTAClick("header", "Book a Demo")}>
-            <Booker />
-          </div>
+          <Booker onOpen={() => trackCTAClick("header", "Book a Demo")} />
         </div>
       </nav>
 
@@ -134,7 +132,7 @@ export default function Header() {
 
               {/* Mobile Book Demo Button */}
               <div className="p-4 border-t border-gray-200">
-                <Booker />
+                <Booker onOpen={() => trackCTAClick("header", "Book a Demo")} />
               </div>
             </div>
           </div>

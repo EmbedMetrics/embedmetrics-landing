@@ -8,8 +8,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 const NotFoundPage: React.FC = () => {
+  const { trackCTAClick } = useAnalytics();
+
   return (
     <div className="flex flex-col min-h-screen">
       <Helmet>
@@ -35,7 +38,14 @@ const NotFoundPage: React.FC = () => {
         <p className="text-xl text-gray-600 mb-8">
           The page you're looking for doesn't exist.
         </p>
-        <Link to="/" className="text-indigo-600 hover:underline text-lg">
+        <Link
+          to="/"
+          className="text-indigo-600 hover:underline text-lg"
+          aria-label="Back to Home"
+          onClick={() =>
+            trackCTAClick("not-found", "Back to Home", { is_navigation: true })
+          }
+        >
           ← Back to Home
         </Link>
       </main>

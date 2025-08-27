@@ -8,8 +8,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ContentContainer from "../components/ContentContainer";
 import LegalMetaHead from "../components/LegalMetaHead";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 export default function PrivacyPolicyPage() {
+  const { trackCTAClick } = useAnalytics();
+
   return (
     <>
       <LegalMetaHead page="privacy" />
@@ -121,6 +124,32 @@ export default function PrivacyPolicyPage() {
             <a
               href="mailto:hello@embedmetrics.com"
               className="text-indigo-600 underline"
+              onClick={(e) =>
+                trackCTAClick(
+                  "legal",
+                  "Contact Email",
+                  {
+                    is_navigation: true,
+                    destination_url: (e.currentTarget as HTMLAnchorElement)
+                      .href,
+                    content_type: "privacy",
+                  },
+                  { send_instantly: true }
+                )
+              }
+              onAuxClick={(e) =>
+                trackCTAClick(
+                  "legal",
+                  "Contact Email",
+                  {
+                    is_navigation: true,
+                    destination_url: (e.currentTarget as HTMLAnchorElement)
+                      .href,
+                    content_type: "privacy",
+                  },
+                  { send_instantly: true }
+                )
+              }
             >
               hello@embedmetrics.com
             </a>

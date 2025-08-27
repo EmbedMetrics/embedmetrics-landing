@@ -499,15 +499,15 @@ export default function AboutPage() {
                     Ready to embed AI-native analytics in your app?
                   </p>
                   <div className="bg-white rounded-xl p-6 ring-1 ring-indigo-200 shadow-sm max-w-md mx-auto">
-                    <div
-                      onClick={() =>
-                        trackCTAClick("about", "Book a Demo", {
-                          content_type: "about",
-                          content_id: "demo-cta",
-                        })
-                      }
-                    >
-                      <Booker />
+                    <div>
+                      <Booker
+                        onOpen={() =>
+                          trackCTAClick("about", "Book a Demo", {
+                            content_type: "about",
+                            content_id: "demo-cta",
+                          })
+                        }
+                      />
                     </div>
                   </div>
                 </div>

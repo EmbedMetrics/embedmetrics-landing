@@ -84,7 +84,9 @@ export interface FunnelProperties {
     | "blog"
     | "blog-post"
     | "not-found"
-    | "pricing";
+    | "pricing"
+    | "terms"
+    | "privacy";
   content_id?: string;
   post_title?: string;
 

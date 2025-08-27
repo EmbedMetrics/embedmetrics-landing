@@ -154,13 +154,12 @@ export default function LandingPage() {
                 whileTap={{ scale: 0.95 }}
                 className="w-full sm:w-auto"
                 data-cta="book-demo-hero"
-                onClick={() => trackCTAClick("hero", "Book a Demo")}
               >
-                <Booker />
+                <Booker onOpen={() => trackCTAClick("hero", "Book a Demo")} />
               </motion.div>
 
               {/* Screenshot with neutral spotlight */}
-              <div className="mt-5 w-full max-w-3xl px-4 em-screenshot-wrap">
+              <div className="mt-14 w-full max-w-3xl px-4 em-screenshot-wrap">
                 <picture>
                   <source
                     srcSet="/assets/Acme_Analytics_Welcome.avif"
@@ -519,9 +518,8 @@ token='YOUR_TOKEN' />`}
               whileTap={{ scale: 0.95 }}
               className="w-full sm:w-auto"
               data-cta="book-demo-final"
-              onClick={() => trackCTAClick("final", "Book a Demo")}
             >
-              <Booker />
+              <Booker onOpen={() => trackCTAClick("final", "Book a Demo")} />
             </motion.div>
           </section>
         </ContentContainer>

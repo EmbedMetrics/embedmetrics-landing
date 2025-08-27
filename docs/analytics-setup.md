@@ -136,7 +136,8 @@ In PostHog, create funnels with these steps:
 - `about` - Company/product information
 - `blog` - Blog index page
 - `blog-post` - Individual blog articles (`/blog/:slug`)
-- `privacy` / `terms` - Legal pages
+- `terms` - Terms of Service page
+- `privacy` - Privacy Policy page
 - `not-found` - 404 error page
 
 ### 3. Custom Properties
@@ -304,6 +305,8 @@ Enable debug mode to see all events in console:
 11. **Previous Page Tracking**: Verify `previous_page` transitions correctly (e.g., `landing → about → blog-post`)
 12. **No Duplicate Page Views**: Confirm no duplicate `page_view` events on rapid re-renders
 13. **Not-Found Page Views**: Hit a bogus path and confirm `page_view` with `page_name='not-found'` and `content_type='not-found'`
+14. **Legal Page Email Links**: Click email links on Terms/Privacy pages, confirm `cta_click` with `cta_location='legal'`, `is_navigation: true`, and `destination_url`
+15. **404 Navigation**: Click "Back to Home" on 404 page, confirm `cta_click` with `cta_location='not-found'` and `is_navigation: true`
 
 ## 📚 **Additional Resources**
 
