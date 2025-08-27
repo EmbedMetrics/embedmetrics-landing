@@ -93,6 +93,9 @@ export interface FunnelProperties {
   cta_id?: string;
   feature_name?: string;
   scroll_depth?: number;
+  is_navigation?: boolean;
+  destination_url?: string;
+  state?: string;
 
   // Business context
   company_size?: string;

@@ -8,12 +8,21 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import logo from "../assets/EmbedMetrics.svg";
 import Booker from "./Booker";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 export default function Header() {
+  const { trackCTAClick } = useAnalytics();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setIsMobileMenuOpen((prev) => {
+      const next = !prev;
+      trackCTAClick("header", "Mobile menu", {
+        state: next ? "open" : "close",
+        is_navigation: true,
+      });
+      return next;
+    });
   };
 
   const closeMobileMenu = () => {
@@ -25,7 +34,10 @@ export default function Header() {
       <Link
         to="/"
         className="flex items-center space-x-2 min-w-0"
-        onClick={closeMobileMenu}
+        onClick={() => {
+          closeMobileMenu();
+          trackCTAClick("header", "Logo", { is_navigation: true });
+        }}
       >
         <img src={logo} alt="Logo" className="w-8 h-8 flex-shrink-0" />
         <span className="font-semibold text-base sm:text-lg md:text-xl text-gray-900">
@@ -38,17 +50,25 @@ export default function Header() {
         <Link
           to="/blog"
           className="text-gray-700 hover:text-indigo-600 whitespace-nowrap"
+          onClick={() =>
+            trackCTAClick("header", "Blog", { is_navigation: true })
+          }
         >
           Blog
         </Link>
         <Link
           to="/about"
           className="text-gray-700 hover:text-indigo-600 whitespace-nowrap"
+          onClick={() =>
+            trackCTAClick("header", "About", { is_navigation: true })
+          }
         >
           About
         </Link>
         <div className="flex-shrink-0">
-          <Booker />
+          <div onClick={() => trackCTAClick("header", "Book a Demo")}>
+            <Booker />
+          </div>
         </div>
       </nav>
 
@@ -93,14 +113,20 @@ export default function Header() {
                 <Link
                   to="/blog"
                   className="text-gray-700 hover:text-indigo-600 py-2 px-3 rounded-md hover:bg-gray-50 transition-colors"
-                  onClick={closeMobileMenu}
+                  onClick={() => {
+                    closeMobileMenu();
+                    trackCTAClick("header", "Blog", { is_navigation: true });
+                  }}
                 >
                   Blog
                 </Link>
                 <Link
                   to="/about"
                   className="text-gray-700 hover:text-indigo-600 py-2 px-3 rounded-md hover:bg-gray-50 transition-colors"
-                  onClick={closeMobileMenu}
+                  onClick={() => {
+                    closeMobileMenu();
+                    trackCTAClick("header", "About", { is_navigation: true });
+                  }}
                 >
                   About
                 </Link>

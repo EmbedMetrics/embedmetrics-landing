@@ -4,8 +4,31 @@
  */
 
 import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { useAnalytics } from "../hooks/useAnalytics";
+import { Link } from "react-router-dom";
+import type { MouseEvent as ReactMouseEvent } from "react";
 
 export default function Footer() {
+  const { trackCTAClick } = useAnalytics();
+
+  // Handler for outbound links (captures middle-clicks and new tab opens)
+  const handleOutbound =
+    (name: string) => (e: ReactMouseEvent<HTMLAnchorElement>) => {
+      // Only left (0) and middle (1) clicks
+      if (e.type === "auxclick" && (e as any).button !== 1) return;
+      if (e.type === "click" && (e as any).button !== 0) return;
+
+      trackCTAClick(
+        "footer",
+        name,
+        {
+          destination_url: (e.currentTarget as HTMLAnchorElement).href,
+          is_navigation: true, // outbound is still navigation
+        },
+        { send_instantly: true }
+      );
+    };
+
   return (
     <footer className="border-t border-gray-200 mt-12 text-sm text-gray-600">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 py-12">
@@ -13,12 +36,15 @@ export default function Footer() {
           <h4 className="font-semibold mb-2">Resources</h4>
           <ul>
             <li>
-              <a
-                href="/blog"
+              <Link
+                to="/blog"
                 className="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                onClick={() =>
+                  trackCTAClick("footer", "Blog", { is_navigation: true })
+                }
               >
                 Blog
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -29,6 +55,8 @@ export default function Footer() {
               <a
                 href="mailto:hello@embedmetrics.com"
                 className="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                onClick={handleOutbound("Email")}
+                onAuxClick={handleOutbound("Email")}
               >
                 hello@embedmetrics.com
               </a>
@@ -44,6 +72,8 @@ export default function Footer() {
               rel="noopener noreferrer"
               aria-label="LinkedIn"
               className="text-indigo-600 hover:text-indigo-800 transition focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              onClick={handleOutbound("LinkedIn")}
+              onAuxClick={handleOutbound("LinkedIn")}
             >
               <FaLinkedinIn className="w-5 h-5" />
             </a>
@@ -53,6 +83,8 @@ export default function Footer() {
               rel="noopener noreferrer"
               aria-label="X"
               className="text-indigo-600 hover:text-indigo-800 transition focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              onClick={handleOutbound("X")}
+              onAuxClick={handleOutbound("X")}
             >
               <FaXTwitter className="w-5 h-5" />
             </a>
@@ -62,20 +94,30 @@ export default function Footer() {
           <h4 className="font-semibold mb-2">Legal</h4>
           <ul>
             <li>
-              <a
-                href="/terms"
+              <Link
+                to="/terms"
                 className="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                onClick={() =>
+                  trackCTAClick("footer", "Terms of Service", {
+                    is_navigation: true,
+                  })
+                }
               >
                 Terms of Service
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/privacy"
+              <Link
+                to="/privacy"
                 className="hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                onClick={() =>
+                  trackCTAClick("footer", "Privacy Policy", {
+                    is_navigation: true,
+                  })
+                }
               >
                 Privacy Policy
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

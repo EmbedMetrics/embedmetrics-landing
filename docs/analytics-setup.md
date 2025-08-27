@@ -186,6 +186,8 @@ Add `data-feature="feature-name"` to any section:
 
 **Note**: UTM parameters are captured on first page load and persisted per-session using `sessionStorage`. This means UTMs persist across SPA navigation within the same browser tab/session, but are reset when the user closes the tab or starts a new session.
 
+**Header/Footer Navigation**: Navigation links in header and footer are tracked as `cta_click` events with `cta_location="header|footer"` and `is_navigation: true` to distinguish them from conversion CTAs. Outbound links (social media, email) use `send_instantly: true` for reliable delivery and include `destination_url` for tracking.
+
 **Current features tracked on Landing page:**
 
 - `how-it-works` - How It Works section
