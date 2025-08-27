@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import BlogMetaHead from "../../components/BlogPostMetaHead";
 import React, { useRef, useEffect, useState } from "react";
 import { BookDemoLink } from "./MDXComponents";
+import { useAnalytics } from "../../hooks/useAnalytics";
 
 // Dynamically import all MDX files in this folder
 const mdxModules = import.meta.glob("./*.mdx", { eager: true });
@@ -22,6 +23,7 @@ Object.entries(mdxModules).forEach(([path, mod]: any) => {
 });
 
 export default function BlogPostDynamicPage() {
+  const { trackBlogEngagement } = useAnalytics();
   const { slug } = useParams();
   const postMeta = blogMeta.find((m) => m.slug === slug);
   const PostComponent = slug ? slugToComponent[slug] : undefined;
@@ -35,6 +37,46 @@ export default function BlogPostDynamicPage() {
       setReadTime(Math.max(1, Math.ceil(wordCount / 200)));
     }
   }, [slug]);
+
+  // Track blog post read engagement (gated by time/scroll)
+  useEffect(() => {
+    if (!postMeta || !slug) return;
+
+    let fired = false;
+
+    const onScroll = () => {
+      const maxScroll =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const pct = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 100;
+      if (!fired && pct >= 40) {
+        trackBlogEngagement("read", slug, {
+          post_title: postMeta.title,
+          read_time_minutes: readTime,
+        });
+        fired = true;
+        window.removeEventListener("scroll", onScroll);
+        clearTimeout(t);
+      }
+    };
+
+    const t = setTimeout(() => {
+      if (!fired) {
+        trackBlogEngagement("read", slug, {
+          post_title: postMeta.title,
+          read_time_minutes: readTime,
+        });
+        fired = true;
+        window.removeEventListener("scroll", onScroll); // optional cleanup
+      }
+    }, 8000); // 8s on-page
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(t);
+    };
+  }, [postMeta, slug, trackBlogEngagement, readTime]);
 
   if (!postMeta || !PostComponent) {
     return (
@@ -81,6 +123,8 @@ export default function BlogPostDynamicPage() {
         image={postMeta.image}
         imageAlt={postMeta.imageAlt}
         readTime={readTime}
+        slug={slug}
+        postTitle={postMeta.title}
       >
         <div ref={contentRef}>
           {/* @ts-expect-error MDX types do not declare 'components' prop, but it works at runtime */}

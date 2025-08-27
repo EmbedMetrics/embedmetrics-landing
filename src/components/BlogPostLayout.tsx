@@ -7,6 +7,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ShareLinks from "./ShareLinks";
+import { useAnalytics } from "../hooks/useAnalytics";
 
 type Props = {
   children: React.ReactNode;
@@ -19,6 +20,8 @@ type Props = {
   };
   image?: string;
   imageAlt?: string;
+  slug?: string;
+  postTitle?: string;
 };
 
 export default function BlogPostLayout({
@@ -28,7 +31,10 @@ export default function BlogPostLayout({
   author,
   image,
   imageAlt,
+  slug,
+  postTitle,
 }: Props) {
+  const { trackCTAClick } = useAnalytics();
   const shareUrl =
     typeof window !== "undefined"
       ? window.location.href
@@ -87,6 +93,11 @@ export default function BlogPostLayout({
               <Link
                 to="/blog"
                 className="inline-flex items-center text-sm text-indigo-600 hover:text-indigo-700 transition-colors group"
+                onClick={() =>
+                  trackCTAClick("blog-post", "Back to Blog", {
+                    is_navigation: true,
+                  })
+                }
               >
                 <span className="mr-2 group-hover:-translate-x-1 transition-transform">
                   ←
@@ -142,6 +153,8 @@ export default function BlogPostLayout({
                     ? window.location.href
                     : "https://embedmetrics.com"
                 }
+                slug={slug}
+                postTitle={postTitle}
               />
             </motion.div>
           </motion.article>

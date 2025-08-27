@@ -11,6 +11,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import BlogMetaIndexHead from "../../components/BlogMetaIndexHead";
 import ContentContainer from "../../components/ContentContainer";
+import { useAnalytics } from "../../hooks/useAnalytics";
 
 // Date formatter instance outside component to avoid re-creation
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -21,6 +22,7 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 });
 
 export default function BlogIndexPage() {
+  const { trackCTAClick } = useAnalytics();
   const shouldReduce = useReducedMotion();
 
   // Format date as 'Month Day, Year' with UTC handling
@@ -88,6 +90,14 @@ export default function BlogIndexPage() {
                     to={`/blog/${post.slug}`}
                     aria-label={`Read: ${post.title}`}
                     className="block h-full"
+                    onClick={() =>
+                      trackCTAClick("blog-index", "Read post", {
+                        is_navigation: true, // ← add this
+                        content_type: "blog-post", // ← align type
+                        content_id: post.slug,
+                        post_title: post.title,
+                      })
+                    }
                   >
                     <div className="aspect-video overflow-hidden">
                       <img
@@ -141,12 +151,22 @@ export default function BlogIndexPage() {
                   <Link
                     to="/about"
                     className="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors"
+                    onClick={() =>
+                      trackCTAClick("blog-index", "Learn More", {
+                        is_navigation: true,
+                      })
+                    }
                   >
                     Learn More
                   </Link>
                   <Link
                     to="/"
                     className="inline-flex items-center justify-center px-6 py-3 bg-white text-indigo-600 font-semibold rounded-lg hover:bg-indigo-50 transition-colors ring-1 ring-indigo-200"
+                    onClick={() =>
+                      trackCTAClick("blog-index", "Back to Home", {
+                        is_navigation: true,
+                      })
+                    }
                   >
                     Back to Home
                   </Link>

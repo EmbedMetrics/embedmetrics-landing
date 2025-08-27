@@ -86,6 +86,7 @@ export interface FunnelProperties {
     | "not-found"
     | "pricing";
   content_id?: string;
+  post_title?: string;
 
   // Interaction context
   cta_location?: string;
@@ -96,6 +97,8 @@ export interface FunnelProperties {
   is_navigation?: boolean;
   destination_url?: string;
   state?: string;
+  share_platform?: "x" | "facebook" | "linkedin" | "copy";
+  read_time_minutes?: number;
 
   // Business context
   company_size?: string;
@@ -301,21 +304,26 @@ export function useAnalytics() {
     (
       action: "read" | "share",
       blogSlug: string,
-      properties?: Partial<FunnelProperties>
+      properties?: Partial<FunnelProperties>,
+      options?: CaptureOptions // ← add this
     ) => {
       if (isDNT()) return; // Early return if DNT is on
 
       const eventName =
         action === "read" ? FunnelEvents.BLOG_READ : FunnelEvents.BLOG_SHARE;
 
-      posthog?.capture(eventName, {
-        content_type: "blog",
-        content_id: blogSlug,
-        page_name: getCurrentPageName(),
-        funnel_stage: FunnelStages.CONSIDERATION,
-        ...baseProps(),
-        ...properties,
-      });
+      posthog?.capture(
+        eventName,
+        {
+          content_type: "blog-post", // ← change from "blog" for consistency
+          content_id: blogSlug,
+          page_name: getCurrentPageName(),
+          funnel_stage: FunnelStages.CONSIDERATION,
+          ...baseProps(),
+          ...properties,
+        },
+        options // ← pass through
+      );
     },
     [posthog]
   );
