@@ -25,6 +25,9 @@ const isDNT = () => {
   );
 };
 
+// Reusable DNT/GPC helper for other modules
+export const isDNTActive = () => isDNT();
+
 // Funnel event names - use enum for consistency
 export enum FunnelEvents {
   // Page Views
@@ -190,20 +193,39 @@ const baseProps = (): Partial<FunnelProperties> => ({
 export function useAnalytics() {
   const posthog = usePostHog();
 
+  // DRY helper to get PostHog client with consistent guards
+  const getClientOrSkip = (why: string) => {
+    if (isDNT()) {
+      if (import.meta.env.DEV) {
+        console.debug(`[Analytics] Skip ${why} due to DNT`);
+      }
+      return null;
+    }
+    const client = posthog ?? (window as any).posthog;
+    const optedOut = client?.has_opted_out_capturing?.() === true;
+    const optedIn = client?.has_opted_in_capturing?.() === true;
+    const canCapture = !!client && (optedIn || !optedOut);
+    if (!canCapture) {
+      if (import.meta.env.DEV) {
+        console.debug(`[Analytics] Skip ${why} - PostHog not ready`);
+      }
+      return null;
+    }
+    return client;
+  };
+
   // Track page views with funnel context
   const trackPageView = useCallback(
     (pageName: string, properties?: Partial<FunnelProperties>) => {
-      if (isDNT()) return; // Early return if DNT is on
-
-      // Fall back to global PostHog if hook isn't ready yet
-      const client = posthog ?? window.posthog;
+      const client = getClientOrSkip("page_view");
+      if (!client) return;
 
       // Add lightweight context for better analytics queries
       const extras: Partial<FunnelProperties> = {};
       if (pageName === "blog-post") {
         const m = window.location.pathname.match(/^\/blog\/([^\/?#]+)/);
         if (m?.[1]) {
-          extras.content_type = "blog-post"; // ← fix
+          extras.content_type = "blog-post";
           extras.content_id = m[1]; // slug
         }
       } else if (pageName === "not-found") {
@@ -211,7 +233,7 @@ export function useAnalytics() {
         extras.content_id = window.location.pathname; // missing path
       }
 
-      client?.capture(FunnelEvents.PAGE_VIEW, {
+      client.capture(FunnelEvents.PAGE_VIEW, {
         page_name: pageName,
         funnel_stage: getFunnelStage(pageName),
         previous_page: lastPageName || undefined,
@@ -236,10 +258,11 @@ export function useAnalytics() {
       properties?: Partial<FunnelProperties>,
       options?: CaptureOptions
     ) => {
-      if (isDNT()) return; // Early return if DNT is on
+      const client = getClientOrSkip("cta_click");
+      if (!client) return;
 
       const page = getCurrentPageName();
-      posthog?.capture(
+      client.capture(
         FunnelEvents.CTA_CLICK,
         {
           cta_location: ctaLocation,
@@ -267,7 +290,8 @@ export function useAnalytics() {
       action: "modal_open" | "form_start" | "form_complete",
       properties?: Partial<FunnelProperties>
     ) => {
-      if (isDNT()) return; // Early return if DNT is on
+      const client = getClientOrSkip("demo_interest");
+      if (!client) return;
 
       const eventName =
         action === "modal_open"
@@ -276,7 +300,7 @@ export function useAnalytics() {
           ? FunnelEvents.DEMO_FORM_START
           : FunnelEvents.DEMO_BOOKED;
 
-      posthog?.capture(eventName, {
+      client.capture(eventName, {
         page_name: getCurrentPageName(),
         funnel_stage: FunnelStages.INTENT,
         ...baseProps(),
@@ -289,9 +313,10 @@ export function useAnalytics() {
   // Track scroll depth
   const trackScrollDepth = useCallback(
     (depth: number) => {
-      if (isDNT()) return; // Early return if DNT is on
+      const client = getClientOrSkip("scroll_depth");
+      if (!client) return;
 
-      posthog?.capture(FunnelEvents.SCROLL_DEPTH, {
+      client.capture(FunnelEvents.SCROLL_DEPTH, {
         scroll_depth: depth,
         page_name: getCurrentPageName(),
         funnel_stage: getFunnelStage(getCurrentPageName()),
@@ -307,24 +332,25 @@ export function useAnalytics() {
       action: "read" | "share",
       blogSlug: string,
       properties?: Partial<FunnelProperties>,
-      options?: CaptureOptions // ← add this
+      options?: CaptureOptions
     ) => {
-      if (isDNT()) return; // Early return if DNT is on
+      const client = getClientOrSkip("blog_engagement");
+      if (!client) return;
 
       const eventName =
         action === "read" ? FunnelEvents.BLOG_READ : FunnelEvents.BLOG_SHARE;
 
-      posthog?.capture(
+      client.capture(
         eventName,
         {
-          content_type: "blog-post", // ← change from "blog" for consistency
+          content_type: "blog-post",
           content_id: blogSlug,
           page_name: getCurrentPageName(),
           funnel_stage: FunnelStages.CONSIDERATION,
           ...baseProps(),
           ...properties,
         },
-        options // ← pass through
+        options
       );
     },
     [posthog]
@@ -333,14 +359,16 @@ export function useAnalytics() {
   // Track feature interest
   const trackFeatureInterest = useCallback(
     (featureName: string, properties?: Partial<FunnelProperties>) => {
-      if (isDNT()) return; // Early return if DNT is on
+      const client = getClientOrSkip("feature_interest");
+      if (!client) return;
 
-      posthog?.capture(FunnelEvents.FEATURE_VIEW, {
+      const page = getCurrentPageName();
+      client.capture(FunnelEvents.FEATURE_VIEW, {
         feature_name: featureName,
-        page_name: getCurrentPageName(),
-        funnel_stage: getFunnelStage(getCurrentPageName()),
+        page_name: page,
+        funnel_stage: getFunnelStage(page),
         ...baseProps(),
-        ...properties, // ← add this
+        ...properties,
       });
     },
     [posthog]
@@ -349,11 +377,13 @@ export function useAnalytics() {
   // Track exit intent
   const trackExitIntent = useCallback(
     (properties?: Partial<FunnelProperties>) => {
-      if (isDNT()) return; // Early return if DNT is on
+      const client = getClientOrSkip("exit_intent");
+      if (!client) return;
 
-      posthog?.capture(FunnelEvents.EXIT_INTENT, {
-        page_name: getCurrentPageName(),
-        funnel_stage: getFunnelStage(getCurrentPageName()),
+      const page = getCurrentPageName();
+      client.capture(FunnelEvents.EXIT_INTENT, {
+        page_name: page,
+        funnel_stage: getFunnelStage(page),
         ...baseProps(),
         ...properties,
       });

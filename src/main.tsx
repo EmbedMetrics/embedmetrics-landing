@@ -38,12 +38,8 @@ const app =
             (typeof navigator !== "undefined" &&
               (navigator as any).globalPrivacyControl === true); // GPC
 
-          // Only opt in if privacy signals are OFF and the user hasn't explicitly set a choice already
-          if (
-            !dnt &&
-            !ph.has_opted_out_capturing() &&
-            !ph.has_opted_in_capturing()
-          ) {
+          // Respect an explicit opt-out; otherwise opt in (because we defaulted to opt out)
+          if (!dnt && !ph.has_opted_out_capturing()) {
             ph.opt_in_capturing();
           }
         },
