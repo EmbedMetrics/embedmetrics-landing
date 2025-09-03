@@ -19,6 +19,24 @@ export type BlogPostMeta = {
 
 export const blogMeta: BlogPostMeta[] = [
   {
+    slug: "from-data-pulling-to-answer-receiving",
+    title:
+      "From Data Pulling to Answer Receiving: The Shift in BI Expectations and Reporting",
+    date: "2025-09-16",
+    image: "/assets/quality-assurance-analytics.png",
+    imageAlt:
+      "AI-powered conversational analytics interface showing data interaction",
+    description:
+      "SaaS teams need both reports and real-time answers. See how embedded, conversational BI complements dashboards by making analytics more accessible for all users.",
+    excerpt:
+      "Reports and dashboards remain critical. But SaaS teams now expect more: the ability to ask questions in real time and receive clear, conversational answers embedded in their workflow.",
+    author: {
+      name: "Kateryna Plakosh",
+      avatar: "/assets/kateryna.png",
+      role: "Founder",
+    },
+  },
+  {
     slug: "career-growth-in-startups",
     title: "How Startups Can Support Career Growth",
     date: "2025-09-02",
@@ -31,7 +49,7 @@ export const blogMeta: BlogPostMeta[] = [
       "Career growth is one of the top reasons people join or leave a company. In fast-moving startups, it matters even more. The pace is high. The challenges are new. The opportunities to learn arrive every week. But too often, career growth is seen as something that only big companies can provide. The truth is different. Startups have powerful ways to help people grow if they are intentional about it.",
     author: {
       name: "Kateryna Plakosh",
-      avatar: "/assets/kateryna.png", // Placeholder until you provide the image
+      avatar: "/assets/kateryna.png",
       role: "Founder",
     },
   },

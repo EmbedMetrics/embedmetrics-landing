@@ -27,10 +27,24 @@ export const routes: RouteConfig[] = [
     changefreq: "monthly",
   },
   {
+    path: "/solutions",
+    component: "SolutionsPage",
+    pageName: "solutions",
+    priority: 0.8,
+    changefreq: "weekly",
+  },
+  {
+    path: "/solutions/quality-assurance",
+    component: "QualityAssurancePage",
+    pageName: "quality-assurance",
+    priority: 0.8,
+    changefreq: "monthly",
+  },
+  {
     path: "/blog",
     component: "BlogIndexPage",
     pageName: "blog",
-    priority: 0.8,
+    priority: 0.7,
     changefreq: "weekly",
   },
   {

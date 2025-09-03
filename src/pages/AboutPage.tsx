@@ -110,7 +110,7 @@ export default function AboutPage() {
         </div>
 
         <ContentContainer>
-          <main className="max-w-5xl mx-auto px-6 py-12 text-gray-900">
+          <main className="px-6 py-12 text-gray-900">
             {/* Hero Section */}
             <motion.section
               initial={{ opacity: 0, y: 20 }}

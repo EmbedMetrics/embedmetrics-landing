@@ -12,7 +12,7 @@ type Props = {
 
 export default function ContentContainer({ children, className = "" }: Props) {
   return (
-    <main className={`max-w-4xl mx-auto px-4 pt-20 pb-16 ${className}`}>
+    <main className={`max-w-[67.5rem] mx-auto px-4 pt-20 pb-16 ${className}`}>
       {children}
     </main>
   );

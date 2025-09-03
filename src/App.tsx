@@ -8,6 +8,8 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { routes } from "./routes";
 import LandingPage from "./pages/LandingPage";
 import AboutPage from "./pages/AboutPage";
+import SolutionsPage from "./pages/SolutionsPage";
+import QualityAssurancePage from "./pages/QualityAssurancePage";
 import BlogIndexPage from "./pages/blog/BlogIndexPage";
 import TermsPage from "./pages/TermsOfServicePage";
 import PrivacyPage from "./pages/PrivacyPolicyPage";
@@ -20,6 +22,8 @@ import { useAnalytics } from "./hooks/useAnalytics";
 const components = {
   LandingPage,
   AboutPage,
+  SolutionsPage,
+  QualityAssurancePage,
   BlogIndexPage,
   BlogPostDynamicPage,
   TermsPage,

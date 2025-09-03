@@ -37,20 +37,20 @@ export default function BlogIndexPage() {
         <Header />
 
         <ContentContainer>
-          <main className="max-w-5xl mx-auto px-6 py-20">
+          <main className="px-6 py-20">
             {/* Page Header */}
             <motion.header
               initial={shouldReduce ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-20 text-center"
+              className="mb-20"
             >
-              <div className="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full mx-auto mb-6" />
+              <div className="w-24 h-1 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-full mb-6" />
               <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-gray-900 mb-6">
                 Insights from the Team Behind EmbedMetrics
               </h1>
-              <div className="em-hairline max-w-4xl mx-auto bg-white rounded-2xl shadow-sm ring-1 ring-black/8 p-8 sm:p-10">
-                <p className="text-lg text-gray-700 max-w-[65ch] mx-auto">
+              <div className="em-hairline max-w-4xl pr-8 sm:pr-12">
+                <p className="text-lg text-gray-700 max-w-[65ch]">
                   We're sharing the journey of building AI-native,
                   developer-first embedded analytics, and everything we're
                   learning along the way.
