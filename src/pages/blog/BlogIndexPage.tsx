@@ -16,7 +16,7 @@ import { useAnalytics } from "../../hooks/useAnalytics";
 // Date formatter instance outside component to avoid re-creation
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
-  month: "long",
+  month: "short",
   day: "numeric",
   timeZone: "UTC",
 });

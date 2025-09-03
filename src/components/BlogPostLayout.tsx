@@ -8,16 +8,13 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import ShareLinks from "./ShareLinks";
 import { useAnalytics } from "../hooks/useAnalytics";
+import { Author } from "../pages/blog/blogMeta";
 
 type Props = {
   children: React.ReactNode;
   date: string;
   readTime: number;
-  author: {
-    name: string;
-    avatar: string;
-    role: string;
-  };
+  author: Author;
   image?: string;
   imageAlt?: string;
   slug?: string;

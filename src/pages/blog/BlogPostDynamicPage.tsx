@@ -115,11 +115,7 @@ export default function BlogPostDynamicPage() {
       <Header />
       <BlogPostLayout
         date={formattedDate}
-        author={{
-          name: "Yuriy Plakosh",
-          avatar: "/assets/yuriy.jpg",
-          role: "Founder",
-        }}
+        author={postMeta.author}
         image={postMeta.image}
         imageAlt={postMeta.imageAlt}
         readTime={readTime}
